@@ -1,0 +1,189 @@
+body {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    background-color: #3C5539;
+}
+
+
+.container {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero {
+    width: 100%;
+    min-height: 40vh;
+    min-width: 70vw;
+
+    background-image: url("images/famigilia_hero_image.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 2rem;
+}
+
+/* donkere overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* alles boven overlay */
+.hero-content,
+.logo {
+    position: relative;
+    z-index: 1;
+}
+
+/* logo */
+.logo {
+    width: clamp(120px, 20vw, 250px);
+    margin-bottom: 2rem;
+}
+
+/* content */
+.hero-content {
+    color: white;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: clamp(2rem, 6vw, 5rem);
+    margin-bottom: 1rem;
+}
+
+/* .hero-content p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    margin-bottom: 2rem;
+} */
+
+/* button */
+.hero-content button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.about {
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+
+}
+
+.button-about {
+    margin-top: 1rem;
+}
+
+.button-about a {
+    padding: 0.5rem 1rem;
+    border: 1px white solid;
+
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: white;
+}
+
+/* populaire gerechten */
+
+.gerechten {
+    display: grid;
+
+    /* mobiel = 2 kolommen */
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* desktop */
+@media (min-width: 900px) {
+    .gerechten {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.gerecht {
+    position: relative;
+
+    display: block;
+    overflow: hidden;
+
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+/* afbeelding */
+.gerecht img {
+    width: 100%;
+    height: 250px;
+
+    object-fit: cover;
+    display: block;
+
+    transition: 0.3s;
+}
+
+/* donkere overlay */
+.gerecht::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    z-index: 1;
+}
+
+/* titel */
+.gerecht h2 {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: white;
+    font-size: 1.5rem;
+
+    z-index: 2;
+}
+
+/* hover effect */
+.gerecht:hover img {
+    transform: scale(1.05);
+}
