@@ -1,0 +1,6 @@
+@Area52Horeca_HostAddress = http://localhost:5120
+
+GET {{Area52Horeca_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
