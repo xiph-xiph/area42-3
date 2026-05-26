@@ -1,0 +1,90 @@
+Project project_name {
+  database_type: 'PostgreSQL'
+}
+
+table users {
+  id int [pk]
+  phone text
+  name user_role
+  role text
+  email string
+  password_hash string
+}
+
+table issues {
+  id int [pk]
+  user_id int [ref: > users.id]
+  priority priority
+  category issue_category
+  name string
+  description string
+  creation_date date
+  solved_date date
+  solved bool
+}
+
+table reservations {
+  id int [pk]
+  user_id int [ref: > users.id]
+  tafel_id int [ref: > tables.id]
+  start_date datetime
+  amount int
+  restaurant restaurant
+  status reservation_status
+}
+
+table tables {
+  id int [pk]
+  restaurant restaurant
+  max_guests int
+}
+
+table takeaway_orders {
+  id int [pk]
+  user_id text [ref: > users.id]
+  status order_status
+  total_price decimal
+  pickup_time datetime
+}
+
+table order_items {
+  order_id int [ref: > takeaway_orders.id]
+  item_id int [ref: > menu_items.id]
+  quantity int
+}
+
+table menu_items {
+  id int [pk]
+  price decimal
+  name text
+  description text
+}
+
+enum user_role {
+  employee
+  customer
+}
+
+enum priority {
+  low
+  medium
+  high
+  critical
+}
+
+enum issue_category {
+  elektriciteit
+  internet
+  ongedierte
+}
+
+enum reservation_status {
+  scheduled
+  cancelled
+  fulfilled
+}
+
+enum restaurant {
+  restaurant
+  snackbar
+}
