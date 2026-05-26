@@ -1,0 +1,78 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36">
+  <diagram name="Page-1" id="Uj3vJfop6hGFM8GAuemK">
+    <mxGraphModel dx="2057" dy="646" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-9" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="um4RaSyYY9hHr4qkpP4T-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Frontend (React)" vertex="1">
+          <mxGeometry height="60" width="120" x="-50" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-17" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="um4RaSyYY9hHr4qkpP4T-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-19" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="um4RaSyYY9hHr4qkpP4T-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-26" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="um4RaSyYY9hHr4qkpP4T-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Backend (ASP.NET Core)" vertex="1">
+          <mxGeometry height="60" width="120" x="550" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-11" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="um4RaSyYY9hHr4qkpP4T-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Html bestand + assets en een heleboel javascript" vertex="1">
+          <mxGeometry height="60" width="120" x="-50" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-7" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="um4RaSyYY9hHr4qkpP4T-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-22" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="um4RaSyYY9hHr4qkpP4T-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Exposet HTTP endpoints" vertex="1">
+          <mxGeometry height="60" width="120" x="550" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="GET bestellingen" vertex="1">
+          <mxGeometry height="60" width="120" x="260" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-15" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="um4RaSyYY9hHr4qkpP4T-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-21" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="um4RaSyYY9hHr4qkpP4T-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Javascript praat met de backend via HTTP (Fetch API)" vertex="1">
+          <mxGeometry height="60" width="120" x="-50" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="voorbeeld endpoints" vertex="1">
+          <mxGeometry height="60" width="120" x="260" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="POST nieuwe bestelling" vertex="1">
+          <mxGeometry height="60" width="120" x="260" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-20" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="um4RaSyYY9hHr4qkpP4T-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Levert frontend files" vertex="1">
+          <mxGeometry height="60" width="120" x="350" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-23" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="PostgreSQL database" vertex="1">
+          <mxGeometry height="60" width="110" x="555" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-25" edge="1" parent="1" source="um4RaSyYY9hHr4qkpP4T-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="um4RaSyYY9hHr4qkpP4T-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="um4RaSyYY9hHr4qkpP4T-24" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Entity Framework Core" vertex="1">
+          <mxGeometry height="60" width="120" x="550" y="410" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
