@@ -1,5 +1,5 @@
 const Button = () => {
-  return <button>Test Knop</button>;
+  return <button style={{ backgroundColor: "blue" }}>Test Knop</button>;
 };
 
 export default Button;
