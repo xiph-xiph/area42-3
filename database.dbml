@@ -13,7 +13,7 @@ table users {
 
 table issues {
   id int [pk]
-  user_id int [ref: > users.id]
+  user_id int [not null, ref: > users.id]
   priority priority
   category issue_category
   name string
@@ -25,8 +25,8 @@ table issues {
 
 table reservations {
   id int [pk]
-  user_id int [ref: > users.id]
-  tafel_id int [ref: > tables.id]
+  user_id int [not null, ref: > users.id]
+  tafel_id int [not null, ref: > tables.id]
   start_date datetime
   amount int
   restaurant restaurant
@@ -41,15 +41,15 @@ table tables {
 
 table takeaway_orders {
   id int [pk]
-  user_id text [ref: > users.id]
+  user_id text [not null, ref: > users.id]
   status order_status
   total_price decimal
   pickup_time datetime
 }
 
 table order_items {
-  order_id int [ref: > takeaway_orders.id]
-  item_id int [ref: > menu_items.id]
+  order_id int [not null, ref: > takeaway_orders.id]
+  item_id int [not null, ref: > menu_items.id]
   quantity int
 }
 
@@ -87,4 +87,11 @@ enum reservation_status {
 enum restaurant {
   restaurant
   snackbar
+}
+
+enum order_status {
+  cart
+  scheduled
+  completed
+  cancelled
 }
