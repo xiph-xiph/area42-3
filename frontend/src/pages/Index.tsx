@@ -5,6 +5,8 @@ const Index = () => {
     <>
       <h1>Hello World</h1>
       <Button />
+      <h3>Another button</h3>
+      <Button />
     </>
   );
 };

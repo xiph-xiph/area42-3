@@ -1,12 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Index from "./pages/Index";
+
+import Home from "./pages/Home";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Index />} />
-        <Route path="/test" element={<div>Test pagina</div>} />
+
+        <Route path="/" element={<Home />} />
+
+
       </Routes>
     </BrowserRouter>
   );
