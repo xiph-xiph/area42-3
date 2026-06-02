@@ -1,0 +1,22 @@
+.restaurant-card {
+    position: relative;
+    aspect-ratio: 1/1;
+}
+
+/* .restaurant-card__background {
+    border: 5px solid red;
+} */
+
+.restaurant-card__logo {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 70%;
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
