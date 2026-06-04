@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Backend-Area42-3/Backend-Area42-3.csproj" />
+  <Project Path="Business/Business.csproj" />
+  <Project Path="Data/Data.csproj" />
+</Solution>
