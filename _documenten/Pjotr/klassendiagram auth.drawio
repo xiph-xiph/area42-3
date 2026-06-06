@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36">
   <diagram name="Page-1" id="QvldgSK_Ki6Sq2Awx0BK">
-    <mxGraphModel dx="3539" dy="2160" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3388" dy="2109" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -110,7 +110,7 @@
         <mxCell id="NgpRgJpbPgUpKyvGVCmt-40" parent="NgpRgJpbPgUpKyvGVCmt-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ name: OrderStatus" vertex="1">
           <mxGeometry height="26" width="147" y="78" as="geometry" />
         </mxCell>
-        <mxCell id="NgpRgJpbPgUpKyvGVCmt-59" parent="NgpRgJpbPgUpKyvGVCmt-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ role: float" vertex="1">
+        <mxCell id="NgpRgJpbPgUpKyvGVCmt-59" parent="NgpRgJpbPgUpKyvGVCmt-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ role: UserRole" vertex="1">
           <mxGeometry height="26" width="147" y="104" as="geometry" />
         </mxCell>
         <mxCell id="NgpRgJpbPgUpKyvGVCmt-60" parent="NgpRgJpbPgUpKyvGVCmt-39" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ email: DateTime" vertex="1">
