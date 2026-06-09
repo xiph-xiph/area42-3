@@ -1,0 +1,36 @@
+.menu-page {
+    min-height: 100vh;
+    background-color: #3C5539;
+  
+    display: flex;
+    justify-content: center;
+  }
+  
+  .menu-container {
+    width: 100%;
+    max-width: 760px;
+  
+    padding: 2rem 1rem 4rem;
+  }
+  
+  .menu-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  
+    margin-bottom: 2rem;
+  
+    overflow-x: auto;
+  }
+  
+  .menu-navigation button {
+    background: none;
+    border: none;
+  
+    color: white;
+  
+    font-size: 1rem;
+    text-decoration: underline;
+  
+    cursor: pointer;
+  }

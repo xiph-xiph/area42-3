@@ -1,17 +1,37 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-import LaFamiglia from "./pages/LaFamiglia";
+import HomePage from "./pages/HomePage";
+import RestaurantPage from "./pages/RestaurantPage";
+import SnackhoekPage from "./pages/SnackhoekPage";
+import ParkonderhoudPage from "./pages/Parkonderhoudpage";
+import MenuPage from "./pages/MenuPage";
 
-const App = () => {
+
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/la-famiglia" element={<LaFamiglia />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+
+      <Route
+        path="/restaurant"
+        element={<RestaurantPage />}
+      />
+
+      <Route
+        path="/snackhoek"
+        element={<SnackhoekPage />}
+      />
+
+      <Route
+        path="/parkonderhoud"
+        element={<ParkonderhoudPage />}
+      />
+
+      <Route path="/menu"
+      element={<MenuPage />}
+       />
+    </Routes>
   );
-};
+}
 
 export default App;
