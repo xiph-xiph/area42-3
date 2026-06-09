@@ -1,16 +1,20 @@
+import "./DishCard.css";
 
 type DishCardProps = {
-    image: string;
-    name: string;
-}
+  image: string;
+  title: string;
+};
 
-function DishCard (props: DishCardProps) {
-    return (
-        <article>
-            <img src={props.image} alt="" />
-            <h2>{props.name}</h2>
-        </article>
-    );
+function DishCard({ image, title }: DishCardProps) {
+  return (
+    <article className="dish-card">
+      <img src={image} alt={title} className="dish-card__image" />
+
+      <div className="dish-card__overlay">
+        <p>{title}</p>
+      </div>
+    </article>
+  );
 }
 
 export default DishCard;
