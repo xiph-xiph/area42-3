@@ -1,5 +1,5 @@
 import "./RestaurantPage.css";
-import FooterInfo from "../components/Footerinfo";
+import FooterInfo from "../components/FooterInfo";
 
 import DishCard from "../components/DishCard";
 
