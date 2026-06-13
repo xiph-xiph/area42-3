@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import RestaurantPage from "./pages/RestaurantPage";
 import SnackhoekPage from "./pages/SnackhoekPage";
-import ParkonderhoudPage from "./pages/Parkonderhoudpage";
+import ParkonderhoudPage from "./pages/ParkOnderhoudpage";
 import MenuPage from "./pages/MenuPage";
 
 
