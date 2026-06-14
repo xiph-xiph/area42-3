@@ -3,13 +3,15 @@
 ======================================== */
 
 import "./CheckoutPage.css";
+import { useNavigate } from "react-router-dom";
 
 /* ========================================
    COMPONENT
 ======================================== */
 
 function CheckoutPage() {
-  return (
+    const navigate = useNavigate();
+    return (
     <main className="checkout-page">
       <div className="checkout-container">
 
@@ -132,15 +134,18 @@ function CheckoutPage() {
             BUTTON
         ======================================== */}
 
-        <button className="checkout-button">
-
-          Bestelling plaatsen
-
-        </button>
+<button
+  className="checkout-button"
+  onClick={() => navigate("/snackhoek/bevestiging")}
+>
+  Bestelling plaatsen
+</button>
 
       </div>
     </main>
   );
 }
+
+
 
 export default CheckoutPage;

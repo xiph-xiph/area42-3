@@ -83,14 +83,17 @@ function SnackhoekPage() {
 
           <div className="popular-grid">
 
-            {popularProducts.map((product) => (
-              <SnackProductCard
-                key={product.id}
-                image={product.image}
-                title={product.title}
-                price={product.price}
-              />
-            ))}
+          {popularProducts.map((product) => (
+  <SnackProductCard
+    key={product.id}
+    image={product.image}
+    title={product.title}
+    price={product.price}
+    quantity={0}
+    onAdd={() => {}}
+    onRemove={() => {}}
+  />
+))}
 
           </div>
 

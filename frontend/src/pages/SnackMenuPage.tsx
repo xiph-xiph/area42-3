@@ -21,7 +21,7 @@ function SnackMenuPage() {
      STATE
   ======================================== */
 
-  const [cart, setCart] =useState<CartItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const navigate = useNavigate();
 
   /* ========================================
@@ -96,16 +96,7 @@ function SnackMenuPage() {
     );
   };
 
-  const totalItems = cart.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
-
-  const totalPrice = cart.reduce(
-    (total, item) => total + item.quantity * item.price,
-    0
-  );
-
+ 
   /* ========================================
      SCROLL
   ======================================== */
