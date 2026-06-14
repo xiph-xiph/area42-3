@@ -1,0 +1,47 @@
+.reservation-success {
+    margin-top: 2rem;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    text-align: center;
+  
+    color: white;
+  }
+  
+  .success-icon {
+    width: 90px;
+    height: 90px;
+  
+    border-radius: 50%;
+  
+    background: white;
+  
+    color: var(--restaurant-color);
+  
+    font-size: 2.5rem;
+    font-weight: 700;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    margin-bottom: 1.5rem;
+  }
+  
+  .reservation-success h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .reservation-success p {
+    max-width: 420px;
+  
+    line-height: 1.7;
+  
+    margin-bottom: 1rem;
+  }
+  
+  .reservation-success .reservation-submit {
+    margin-top: 2rem;
+  }
