@@ -94,3 +94,27 @@
   
     background: #d97412;
   }
+
+  /* toevoeging om winkelwagen te creeeren  */
+
+  .snack-product-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:.6rem;
+
+}
+
+.snack-product-quantity{
+
+    min-width:22px;
+
+    text-align:center;
+
+    font-weight:700;
+
+    color:#2d2d2d;
+
+}

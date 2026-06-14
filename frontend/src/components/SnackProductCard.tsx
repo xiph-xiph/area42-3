@@ -4,6 +4,7 @@ type SnackProductCardProps = {
   image: string;
   title: string;
   price: number;
+  quantity?: number;
   onAdd?: () => void;
 };
 
@@ -11,6 +12,7 @@ function SnackProductCard({
   image,
   title,
   price,
+  quantity = 0,
   onAdd,
 }: SnackProductCardProps) {
   return (
@@ -28,13 +30,23 @@ function SnackProductCard({
           € {price.toFixed(2).replace(".", ",")}
         </span>
 
-        <button
-          className="snack-product-button"
-          onClick={onAdd}
-          aria-label={`Voeg ${title} toe`}
-        >
-          +
-        </button>
+        <div className="snack-product-actions">
+
+          {quantity > 0 && (
+            <span className="snack-product-quantity">
+              {quantity}
+            </span>
+          )}
+
+          <button
+            className="snack-product-button"
+            onClick={onAdd}
+            aria-label={`Voeg ${title} toe`}
+          >
+            +
+          </button>
+
+        </div>
       </div>
     </article>
   );
