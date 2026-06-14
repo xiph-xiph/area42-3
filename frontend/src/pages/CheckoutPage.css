@@ -1,0 +1,192 @@
+/* ========================================
+   PAGINA
+======================================== */
+
+.checkout-page {
+
+  min-height: 100vh;
+
+  background: var(--snack-primary);
+
+  display: flex;
+
+  justify-content: center;
+
+  padding: 2rem 1rem;
+
+}
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.checkout-container {
+
+  width: 100%;
+
+  max-width: 760px;
+
+  background: white;
+
+  border-radius: var(--radius-large);
+
+  padding: 2rem;
+
+  box-shadow: var(--shadow-card);
+
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.checkout-container h1 {
+
+  text-align: center;
+
+  margin-bottom: .5rem;
+
+}
+
+.checkout-subtitle {
+
+  text-align: center;
+
+  margin-bottom: 2rem;
+
+  color: #666;
+
+}
+
+/* ========================================
+   SECTIES
+======================================== */
+
+.checkout-section {
+
+  margin-bottom: 2rem;
+
+}
+
+.checkout-section h2 {
+
+  margin-bottom: 1rem;
+
+  color: var(--snack-primary);
+
+}
+
+.checkout-section label {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: .4rem;
+
+  margin-bottom: 1rem;
+
+}
+
+/* ========================================
+   FORMULIER
+======================================== */
+
+input,
+textarea {
+
+  width: 100%;
+
+  padding: .9rem;
+
+  border: 1px solid #ddd;
+
+  border-radius: var(--radius-small);
+
+  font-family: inherit;
+
+}
+
+textarea {
+
+  resize: vertical;
+
+}
+
+/* ========================================
+   RADIO BUTTONS
+======================================== */
+
+.radio-option {
+
+  display: flex !important;
+
+  flex-direction: row !important;
+
+  align-items: center;
+
+  gap: .75rem;
+
+}
+
+.radio-option input {
+
+  width: auto;
+
+}
+
+.time-input {
+
+  margin-top: .5rem;
+
+}
+
+/* ========================================
+   BESTELOVERZICHT
+======================================== */
+
+.order-placeholder {
+
+  padding: 1rem;
+
+  background: #f8f8f8;
+
+  border-radius: var(--radius-small);
+
+  color: #666;
+
+}
+
+/* ========================================
+   BUTTON
+======================================== */
+
+.checkout-button {
+
+  width: 100%;
+
+  padding: 1rem;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background: var(--snack-primary);
+
+  color: white;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: var(--transition);
+
+}
+
+.checkout-button:hover {
+
+  opacity: .9;
+
+}

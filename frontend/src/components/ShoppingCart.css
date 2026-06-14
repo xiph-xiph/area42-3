@@ -1,0 +1,120 @@
+/* ========================================
+   WINKELWAGEN
+======================================== */
+
+.shopping-cart {
+  position: sticky;
+  bottom: 1rem;
+
+  margin-top: 2rem;
+
+  padding: 1.5rem;
+
+  background: white;
+
+  border-radius: var(--radius-large);
+
+  box-shadow: var(--shadow-card);
+}
+
+/* ========================================
+   TITEL
+======================================== */
+
+.shopping-cart-title {
+  margin-bottom: 1rem;
+
+  color: var(--snack-text);
+
+  font-size: 1.2rem;
+}
+
+/* ========================================
+   ITEMS
+======================================== */
+
+.shopping-cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.shopping-cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-bottom: .75rem;
+
+  border-bottom: 1px solid #ececec;
+}
+
+/* ========================================
+   ACTIES
+======================================== */
+
+.shopping-cart-actions {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.shopping-cart-actions button {
+  width: 34px;
+  height: 34px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: var(--snack-primary);
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 1.2rem;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.shopping-cart-footer {
+  margin-top: 1.5rem;
+}
+
+.shopping-cart-total {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 1rem;
+
+  font-weight: 700;
+}
+
+.shopping-cart-button {
+  width: 100%;
+
+  padding: .9rem;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background: var(--snack-primary);
+
+  color: white;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: var(--transition);
+}
+
+.shopping-cart-button:hover {
+  opacity: .9;
+}

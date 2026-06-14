@@ -40,7 +40,7 @@ export type MenuItemType = {
         },
       ],
     },
-  
+//   tweede caterogie
     {
       id: "pasta",
       title: "Pasta's",
