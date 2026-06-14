@@ -11,7 +11,8 @@ export type MenuItemType = {
   };
   
   export const menuCategories: MenuCategoryType[] = [
-// eerste caterogie
+
+    // eerste caterogie
   
     {
       id: "pizza",

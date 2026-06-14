@@ -12,8 +12,8 @@ import lasagneImage from "../assets/images/lasagne.png";
 import tiramisuImage from "../assets/images/tiramisu.png";
 import instagramLogo from "../assets/images/instagram-logo.png";
 
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
 
 function RestaurantPage() {
   return (
@@ -50,17 +50,20 @@ function RestaurantPage() {
         </section>
 
         <section className="button-section">
-  <Link
-    to="/menu"
-    className="outline-button"
-  >
-    Menu
-  </Link>
+          <Link
+            to="/restaurant/menu"
+            className="outline-button"
+          >
+            Menu
+          </Link>
 
-  <button className="outline-button">
-    Reserveer
-  </button>
-</section>
+          <Link
+            to="/restaurant/reserveren"
+            className="outline-button"
+          >
+            Reserveer
+          </Link>
+        </section>
 
         <section className="dishes-section">
           <h2>Populaire gerechten</h2>
@@ -88,31 +91,33 @@ function RestaurantPage() {
           </div>
         </section>
 
-    
-       
         <section className="reservation-banner">
-  <p className="reservation-title">
-    Samen eten tijdens je verblijf?
-  </p>
+          <p className="reservation-title">
+            Samen eten tijdens je verblijf?
+          </p>
 
-  <p className="reservation-text">
-    Reserveer snel en eenvoudig via onderstaande knop
-  </p>
+          <p className="reservation-text">
+            Reserveer snel en eenvoudig via onderstaande knop
+          </p>
 
-  <button className="reservation-button">
-    Reserveer
-  </button>
-</section>
-<FooterInfo
-businessName="La Famiglia"
-address="Areastraat 12"
-postalCode="5678 AX"
-phone="0456-454637"
-openingDays="maandag t/m zondag"
-openingHours="12.00u. - 22.00u."
-socialLogo={instagramLogo}
-/>
-    </div>
+          <Link
+            to="/restaurant/reserveren"
+            className="outline-button"
+          >
+            Reserveer
+          </Link>
+        </section>
+
+        <FooterInfo
+          businessName="La Famiglia"
+          address="Areastraat 12"
+          postalCode="5678 AX"
+          phone="0456-454637"
+          openingDays="maandag t/m zondag"
+          openingHours="12.00u. - 22.00u."
+          socialLogo={instagramLogo}
+        />
+      </div>
     </main>
   );
 }

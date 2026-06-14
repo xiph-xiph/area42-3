@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import "./MenuPage.css";
 
 import MenuCategory from "../components/MenuCategory";
-import { menuCategories } from "../data/menudata";
+import { menuCategories } from "../data/menuData";
+
+import BackButton from "../components/BackButton";
 
 //  API functies 
 
@@ -46,6 +48,12 @@ function MenuPage() {
   return (
     <main className="menu-page">
       <div className="menu-container">
+     
+      <BackButton
+  to="/restaurant"
+  label="Terug naar restaurant"
+/>
+
         <nav className="menu-navigation">
           {menuCategories.map((category) => (
             <button

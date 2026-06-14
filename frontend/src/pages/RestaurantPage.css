@@ -95,9 +95,9 @@
   }
   
   .outline-button {
-    min-width: 120px;
+    min-width: 130px;
   
-    padding: 0.75rem 1rem;
+    padding: 0.8rem 1.5rem;
   
     border: 1px solid white;
     border-radius: 999px;
@@ -105,18 +105,21 @@
     background: transparent;
   
     color: white;
-  
     text-decoration: none;
   
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
   
-    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
   }
   
   .outline-button:hover {
     background-color: rgba(255, 255, 255, 0.1);
+  
+    transform: translateY(-2px);
   }
   
   /* ========================================
