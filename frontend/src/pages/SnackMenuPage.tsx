@@ -192,7 +192,11 @@ function SnackMenuPage() {
     }
   }}
   onRemove={removeFromCart}
-  onCheckout={() => navigate("/snackhoek/checkout")}
+  onCheckout={() =>
+    navigate("/snackhoek/checkout", {
+      state: { cart },
+    })
+  }
 />
       </div>
     </main>
