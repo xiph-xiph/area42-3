@@ -60,4 +60,21 @@ export const snackProducts: SnackProduct[] = [
     category: "Burgers",
     popular: true,
   },
+  {
+    id: 7,
+    title: "Coca Cola",
+    price: 3.95,
+    image: hamburgerImage,
+    category: "Dranken",
+    popular: true,
+  },
+
+  {
+    id: 7,
+    title: "Sundea ijs",
+    price: 4.95,
+    image: hamburgerImage,
+    category: "Desserts",
+    popular: true,
+  },
 ];

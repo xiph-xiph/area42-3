@@ -6,6 +6,7 @@
   import ParkonderhoudPage from "./pages/ParkOnderhoudpage";
   import MenuPage from "./pages/MenuPage";
   import ReservationPage from "./pages/ReservationPagse";
+  import SnackMenuPage from "./pages/SnackMenuPage";
 
 
   function App() {
@@ -21,6 +22,11 @@
         <Route
           path="/snackhoek"
           element={<SnackhoekPage />}
+        />
+
+        <Route
+          path="/snackhoek/menu"
+          element={<SnackMenuPage />}
         />
 
         <Route
