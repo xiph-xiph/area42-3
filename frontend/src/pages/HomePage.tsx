@@ -12,6 +12,8 @@ import famigliaLogo from "../assets/logos/frame_logo_lafamiglia.png";
 import snackhoekLogo from "../assets/logos/frame_snackbar_logo.png";
 import parkonderhoudLogo from "../assets/logos/parkonderhoud_logo.png";
 
+
+
 const services = [
   {
     id: 1,
