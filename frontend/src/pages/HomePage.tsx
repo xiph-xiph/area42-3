@@ -48,6 +48,7 @@ const HomePage = () => {
         Welkom
       </h1>
 
+   
       <section className="home-services">
         {services.map((service) => (
           <ServiceCard
