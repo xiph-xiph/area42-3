@@ -26,7 +26,7 @@ const ServiceCard = ({
         className="service-card-logo"
       />
     </Link>
-  );
+  );  
 };
 
 export default ServiceCard;

@@ -102,10 +102,10 @@ function SnackhoekPage() {
         {/* Footer */}
 
         <FooterInfo
-          businessName="La Famiglia"
-          address="Eetplein 123"
+          businessName="De snackhoek"
+          address="Eetplein 125"
           postalCode="4567 EP Veghel"
-          phone="0764 - 356728"
+          phone="0764 - 356738"
           openingDays="maandag t/m zondag"
           openingHours="12.00u. - 22.00u."
           socialLogo={instagramLogo}

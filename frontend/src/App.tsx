@@ -6,6 +6,8 @@ import SnackhoekPage from "./pages/SnackhoekPage";
 import SnackMenuPage from "./pages/SnackMenuPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
+import Area54 from "./pages/area54";
+
 
 import ParkonderhoudPage from "./pages/ParkOnderhoudpage";
 import MenuPage from "./pages/MenuPage";
@@ -55,6 +57,15 @@ function App() {
         path="/parkonderhoud"
         element={<ParkonderhoudPage />}
       />
+
+<Route
+        path="/area54"
+        element={<Area54 />}
+      />
+
+
+
+
     </Routes>
   );
 }

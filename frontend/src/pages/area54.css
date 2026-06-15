@@ -1,0 +1,40 @@
+.area54-container {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 20px;
+    gap: 20px;
+
+    text-align: center;
+
+}
+
+.logo-area54 {
+    max-width: 300px;
+    aspect-ratio: auto;
+}
+
+.welcome-text {
+    text-align: center;
+}
+
+.herofoto {
+    width: 100%;
+    height: auto;
+}
+
+.greenline {
+    background-color: green;
+    width: 100%;
+    height: 5px;
+}
+
+.restaurant-area54 .service-card {
+    width: 400px;
+    height: 100px;
+    border-radius: 0px;
+    margin: 20px;
+
+}
