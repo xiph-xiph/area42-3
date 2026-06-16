@@ -5,7 +5,7 @@ CREATE TABLE users (
     phone text,
     name text,
     role user_role,
-    email text,
+    email text UNIQUE,
     password_hash text
 );
 
