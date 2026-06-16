@@ -1,0 +1,89 @@
+CREATE TYPE user_role AS ENUM ('employee', 'customer');
+
+CREATE TABLE users (
+    id int PRIMARY KEY,
+    phone text,
+    name text,
+    role user_role,
+    email text,
+    password_hash text
+);
+
+CREATE TYPE priority AS ENUM (
+    'low',
+    'medium',
+    'high',
+    'critical'
+);
+
+CREATE TYPE issue_category AS ENUM (
+    'elektriciteit',
+    'internet',
+    'ongedierte'
+);
+
+CREATE TABLE issues (
+    id int PRIMARY KEY,
+    user_id int,
+    priority priority,
+    category issue_category,
+    name text,
+    description text,
+    creation_date date,
+    solved_date date,
+    solved bool,
+    FOREIGN KEY (user_id) REFERENCES users (id) DEFERRABLE INITIALLY IMMEDIATE
+);
+
+CREATE TYPE restaurant AS ENUM ('restaurant', 'snackbar');
+
+CREATE TABLE tables (
+    id int PRIMARY KEY,
+    restaurant restaurant,
+    max_guests int
+);
+
+CREATE TYPE reservation_status AS ENUM (
+    'scheduled',
+    'cancelled',
+    'fulfilled'
+);
+
+CREATE TYPE restaurant AS ENUM ('restaurant', 'snackbar');
+
+CREATE TABLE reservations (
+    id int PRIMARY KEY,
+    user_id int,
+    table_id int,
+    start_date timestamp,
+    amount int,
+    restaurant restaurant,
+    status reservation_status,
+    FOREIGN KEY (user_id) REFERENCES users (id) DEFERRABLE INITIALLY IMMEDIATE,
+    FOREIGN KEY (table_id) REFERENCES tables (id) DEFERRABLE INITIALLY IMMEDIATE
+);
+
+CREATE TABLE takeaway_orders (
+    id int PRIMARY KEY,
+    user_id int,
+    status order_status,
+    total_price decimal,
+    pickup_time timestamp,
+    FOREIGN KEY (user_id) REFERENCES users (id) DEFERRABLE INITIALLY IMMEDIATE
+);
+
+CREATE TABLE menu_items (
+    id int PRIMARY KEY,
+    price decimal,
+    name text,
+    description text
+);
+
+CREATE TABLE order_items (
+    order_id int,
+    item_id int,
+    quantity int,
+    PRIMARY KEY (order_id, item_id),
+    FOREIGN KEY (order_id) REFERENCES takeaway_orders (id) DEFERRABLE INITIALLY IMMEDIATE,
+    FOREIGN KEY (item_id) REFERENCES menu_items (id) DEFERRABLE INITIALLY IMMEDIATE
+);
