@@ -1,12 +1,18 @@
 import "./area54.css";
 
+import { Link } from "react-router-dom";
+
 import area54Logo from "../assets/images/area54_logo.png";
 
 import heroFoto54 from "../assets/images/area54_heropng.png";
 
+import instagramLogo from "../assets/images/instagram-logo.png"
+
 
 
 import ServiceCard from "../components/ServiceCard";
+
+import FooterInfo from "../components/FooterInfo";
 
 import famigliaLogo from "../assets/logos/frame_logo_lafamiglia.png";
 
@@ -52,7 +58,7 @@ const HomePageNew = () => {
                     <div className="greenline"></div>
 
                     <div className="text-area54">
-                        <h3>Restaurant</h3>
+                        <h3>Restaurants</h3>
                         <p>Tijdens je verblijf op ons vakantiepark kun je genieten van diverse eetgelegenheden. Ontdek ons aanbod aan restaurants, snacks en drankjes en kies waar jij vandaag zin in hebt. We wensen je een smakelijk verblijf!</p>
                     </div>
 
@@ -69,6 +75,31 @@ const HomePageNew = () => {
                     </section>
                     
                     <div className="greenline"></div>
+
+                    <div className="text-parkonderhoud">
+                        <h3>Parkonderhoud</h3>
+                        <p>Zie je een storing of mankement tijdens je verblijf? Meld het eenvoudig via onderstaande pagina. Ons onderhoudsteam ontvangt je melding direct en doet er alles aan om het probleem zo snel mogelijk op te lossen.</p>
+                   
+
+                   <Link to="/parkonderhoud">
+                      <button className="button-onderhoud54">Meld een storing</button>
+                    </Link>
+                    
+                    </div>
+
+                    <div className="greenline"></div>
+
+                    <FooterInfo
+          businessName="Area 54"
+          address="Areastraat 12"
+          postalCode="5678 AX"
+          phone="0456-454637"
+          openingDays="maandag t/m zondag"
+          openingHours="08.00u. - 22.00u."
+          socialLogo={instagramLogo}
+        />
+
+                    
                 
                 </div>
         
