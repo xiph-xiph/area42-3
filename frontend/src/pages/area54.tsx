@@ -44,63 +44,67 @@ const services = [
 const HomePageNew = () => {
     return (
         
-                <div className="area54-container">
-                
-                    <div className="logo54-container"><img src={area54Logo} alt="logo" className="logo-area54" /></div>
-                
-                    <div className="hero-container">
-                        <img src={heroFoto54} className="herofoto" alt="herofoto" />
+                <div>
+                    <div className="area54-container">
+                    
+                        <div className="logo54-container"><img src={area54Logo} alt="logo" className="logo-area54" /></div>
+                    
+                        <div className="hero-container">
+                            <img src={heroFoto54} className="herofoto" alt="herofoto" />
+                        </div>
+                    
+                    
+                        <p className="welcome-text"
+                        ><h3>Welkom bij vakantiepark Area54!</h3>
+                             <br/>
+                    
+                            De ideale bestemming om te ontspannen, plezier te maken en samen mooie herinneringen te creëren.
+                             <br/>
+                             <br/>
+                    
+                            Wij wensen je een fijn verblijf op ons park.</p>
+                    
+                        <div className="greenline"></div>
+                        <div className="text-area54">
+                            <h3>Restaurants</h3>
+                            <br />
+                            <p>Tijdens je verblijf op ons vakantiepark kun je genieten van diverse eetgelegenheden. Ontdek ons aanbod aan restaurants, snacks en drankjes en kies waar jij vandaag zin in hebt. We wensen je een smakelijk verblijf!</p>
+                        </div>
+                        <section className="restaurant-area54">
+                            {services.map((service) => (
+                                    <ServiceCard
+                                    key={service.id}
+                                    logo={service.logo}
+                                    image={service.image}
+                                    route={service.route}
+                    
+                                    />
+                            ))}
+                        </section>
+                    
+                        <div className="greenline"></div>
+                        <div className="text-parkonderhoud">
+                            <h3>Parkonderhoud</h3>
+                            <p>Zie je een storing of mankement tijdens je verblijf? Meld het eenvoudig via onderstaande pagina. Ons onderhoudsteam ontvangt je melding direct en doet er alles aan om het probleem zo snel mogelijk op te lossen.</p>
+                    
+                       <Link to="/parkonderhoud">
+                          <button className="button-onderhoud54">Meld een storing</button>
+                        </Link>
+                    
+                        </div>
+                        <div className="greenline"></div>
+                        <FooterInfo
+                              businessName="Area 54"
+                              address="Areastraat 12"
+                              postalCode="5678 AX"
+                              phone="0456-454637"
+                              openingDays="maandag t/m zondag"
+                              openingHours="08.00u. - 22.00u."
+                              socialLogo={instagramLogo}
+                            />
+                    
+                    
                     </div>
-                    
-                    
-                    <p className="welcome-text">Welkom bij vakantiepark Area54!De ideale bestemming om te ontspannen, plezier te maken en samen mooie herinneringen te creëren.Wij wensen je een fijn verblijf op ons park.</p>
-                
-                    <div className="greenline"></div>
-
-                    <div className="text-area54">
-                        <h3>Restaurants</h3>
-                        <p>Tijdens je verblijf op ons vakantiepark kun je genieten van diverse eetgelegenheden. Ontdek ons aanbod aan restaurants, snacks en drankjes en kies waar jij vandaag zin in hebt. We wensen je een smakelijk verblijf!</p>
-                    </div>
-
-                    <section className="restaurant-area54">
-                        {services.map((service) => (
-                                <ServiceCard 
-                                key={service.id}
-                                logo={service.logo}
-                                image={service.image}
-                                route={service.route}
-                                
-                                />
-                        ))}
-                    </section>
-                    
-                    <div className="greenline"></div>
-
-                    <div className="text-parkonderhoud">
-                        <h3>Parkonderhoud</h3>
-                        <p>Zie je een storing of mankement tijdens je verblijf? Meld het eenvoudig via onderstaande pagina. Ons onderhoudsteam ontvangt je melding direct en doet er alles aan om het probleem zo snel mogelijk op te lossen.</p>
-                   
-
-                   <Link to="/parkonderhoud">
-                      <button className="button-onderhoud54">Meld een storing</button>
-                    </Link>
-                    
-                    </div>
-
-                    <div className="greenline"></div>
-
-                    <FooterInfo
-          businessName="Area 54"
-          address="Areastraat 12"
-          postalCode="5678 AX"
-          phone="0456-454637"
-          openingDays="maandag t/m zondag"
-          openingHours="08.00u. - 22.00u."
-          socialLogo={instagramLogo}
-        />
-
-                    
-                
                 </div>
         
         
