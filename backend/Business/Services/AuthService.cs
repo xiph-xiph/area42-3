@@ -6,14 +6,12 @@ using Backend_Area42_3.Repositories;
 
 namespace Backend_Area42_3.Services;
 
-public class AuthService(IUserRepository userRepository)
+public class AuthService(IUserRepository userRepository, IPasswordHasher passwordHasher)
 {
     private readonly IUserRepository _userRepository = userRepository;
+    private readonly IPasswordHasher _passwordHasher = passwordHasher;
 
-    public async Task<SuccessMessageDto> Register(
-        RegisterDto registerDto,
-        IPasswordHasher passwordHasher
-    )
+    public async Task<SuccessMessageDto> Register(RegisterDto registerDto)
     {
         User? existingUser = await _userRepository.GetUserByEmail(registerDto.Email);
         if (existingUser != null)
@@ -25,7 +23,7 @@ public class AuthService(IUserRepository userRepository)
             };
         }
 
-        string hashedPassword = passwordHasher.HashPassword(registerDto.Password);
+        string hashedPassword = _passwordHasher.HashPassword(registerDto.Password);
 
         await _userRepository.CreateUser(
             new User

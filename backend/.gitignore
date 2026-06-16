@@ -71,6 +71,7 @@ wwwroot/dist/
 *.pid
 
 # Environment files
+**/.env
 appsettings.*.json
 
 # JetBrains Rider

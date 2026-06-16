@@ -1,0 +1,52 @@
+### Auth API Tests
+
+@baseUrl = http://localhost:5229/api/auth
+
+### Register - New User
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "phone": "+31612345678",
+  "email": "john@example.com",
+  "password": "SecurePassword123!"
+}
+
+### Register - Another User
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "name": "Jane Smith",
+  "phone": "+31687654321",
+  "email": "jane@example.com",
+  "password": "AnotherPassword456!"
+}
+
+### Login - Valid Credentials
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "SecurePassword123!"
+}
+
+### Login - Invalid Password
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "WrongPassword"
+}
+
+### Login - Non-existent User
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "nonexistent@example.com",
+  "password": "AnyPassword123!"
+}
