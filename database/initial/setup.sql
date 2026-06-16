@@ -49,8 +49,6 @@ CREATE TYPE reservation_status AS ENUM (
     'fulfilled'
 );
 
-CREATE TYPE restaurant AS ENUM ('restaurant', 'snackbar');
-
 CREATE TABLE reservations (
     id int PRIMARY KEY,
     user_id int,
@@ -61,6 +59,13 @@ CREATE TABLE reservations (
     status reservation_status,
     FOREIGN KEY (user_id) REFERENCES users (id) DEFERRABLE INITIALLY IMMEDIATE,
     FOREIGN KEY (table_id) REFERENCES tables (id) DEFERRABLE INITIALLY IMMEDIATE
+);
+
+CREATE TYPE order_status AS ENUM (
+    'Cart',
+    'Scheduled',
+    'Completed',
+    'Cancelled'
 );
 
 CREATE TABLE takeaway_orders (
