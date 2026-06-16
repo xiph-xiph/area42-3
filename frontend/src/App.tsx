@@ -16,7 +16,7 @@ import ReservationPage from "./pages/ReservationPagse";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<Area54 />} />
 
       <Route
         path="/restaurant"
