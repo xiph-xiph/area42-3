@@ -1,3 +1,4 @@
+using Backend_Area42_3.Enums;
 using Backend_Area42_3.Models;
 using Npgsql;
 
@@ -27,9 +28,30 @@ public class UserRepository(NpgsqlDataSource dataSource) : IUserRepository
         await command.ExecuteNonQueryAsync();
     }
 
-    public Task<User> GetUserByEmail(string email)
+    public async Task<User?> GetUserByEmail(string email)
     {
-        throw new NotImplementedException();
+        using var connection = await _dataSource.OpenConnectionAsync();
+
+        string query =
+            "SELECT id, name, email, phone, password_hash, role::text FROM users WHERE email = @Email";
+        using var command = new NpgsqlCommand(query, connection);
+        command.Parameters.AddWithValue("@Email", email);
+
+        using var reader = await command.ExecuteReaderAsync();
+        if (await reader.ReadAsync())
+        {
+            return new User
+            {
+                Id = reader.GetInt32(0),
+                Name = reader.GetString(1),
+                Email = reader.GetString(2),
+                Phone = reader.GetString(3),
+                PasswordHash = reader.GetString(4),
+                Role = Enum.Parse<UserRole>(reader.GetString(5), ignoreCase: true),
+            };
+        }
+
+        return null;
     }
 
     public Task<User> GetUserById(int id)
