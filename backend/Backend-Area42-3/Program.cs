@@ -34,6 +34,7 @@ public class Program
         };
         services.AddSingleton(NpgsqlDataSource.Create(csb.ConnectionString));
         services.AddSingleton<IPasswordHasher, Argon2PasswordHasher>();
+        services.AddSingleton<ITokenGenerator, JWTTokenGenerator>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<AuthService>();
     }
