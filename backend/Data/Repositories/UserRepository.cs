@@ -54,8 +54,29 @@ public class UserRepository(NpgsqlDataSource dataSource) : IUserRepository
         return null;
     }
 
-    public Task<User> GetUserById(int id)
+    public async Task<User?> GetUserById(int id)
     {
-        throw new NotImplementedException();
+        using var connection = await _dataSource.OpenConnectionAsync();
+
+        string query =
+            "SELECT id, name, email, phone, password_hash, role::text FROM users WHERE id = @Id";
+        using var command = new NpgsqlCommand(query, connection);
+        command.Parameters.AddWithValue("@Id", id);
+
+        using var reader = await command.ExecuteReaderAsync();
+        if (await reader.ReadAsync())
+        {
+            return new User
+            {
+                Id = reader.GetInt32(0),
+                Name = reader.GetString(1),
+                Email = reader.GetString(2),
+                Phone = reader.GetString(3),
+                PasswordHash = reader.GetString(4),
+                Role = Enum.Parse<UserRole>(reader.GetString(5), ignoreCase: true),
+            };
+        }
+
+        return null;
     }
 }
