@@ -61,6 +61,8 @@ public class Program
         services.AddSingleton<IPasswordHasher, Argon2PasswordHasher>();
         services.AddSingleton<ITokenGenerator, JWTTokenGenerator>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IMenuRepository, MenuRepository>();
         services.AddScoped<AuthService>();
+        services.AddScoped<MenuService>();
     }
 }
