@@ -6,11 +6,11 @@ namespace Backend_Area42_3.Repositories;
 
 public class UserRepository(NpgsqlDataSource dataSource) : IUserRepository
 {
-    private readonly NpgsqlDataSource _dataSource = dataSource;
+    private readonly NpgsqlDataSource dataSource = dataSource;
 
     public async Task CreateUser(User user)
     {
-        using var connection = await _dataSource.OpenConnectionAsync();
+        using var connection = await dataSource.OpenConnectionAsync();
 
         string insertQuery =
             @"
@@ -30,7 +30,7 @@ public class UserRepository(NpgsqlDataSource dataSource) : IUserRepository
 
     public async Task<User?> GetUserByEmail(string email)
     {
-        using var connection = await _dataSource.OpenConnectionAsync();
+        using var connection = await dataSource.OpenConnectionAsync();
 
         string query =
             "SELECT id, name, email, phone, password_hash, role::text FROM users WHERE email = @Email";
@@ -56,7 +56,7 @@ public class UserRepository(NpgsqlDataSource dataSource) : IUserRepository
 
     public async Task<User?> GetUserById(int id)
     {
-        using var connection = await _dataSource.OpenConnectionAsync();
+        using var connection = await dataSource.OpenConnectionAsync();
 
         string query =
             "SELECT id, name, email, phone, password_hash, role::text FROM users WHERE id = @Id";
