@@ -1,6 +1,8 @@
 using Backend_Area42_3.Repositories;
 using Backend_Area42_3.Services;
 using DotNetEnv;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 
 namespace Backend_Area42_3;
@@ -10,6 +12,29 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder
+            .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        System.Text.Encoding.UTF8.GetBytes(
+                            Environment.GetEnvironmentVariable("JwtSecretKey")
+                                ?? throw new InvalidOperationException(
+                                    "JwtSecretKey environment variable is not set"
+                                )
+                        )
+                    ),
+                };
+            });
+
+        builder.Services.AddAuthorization();
 
         builder.Services.AddControllers();
 
