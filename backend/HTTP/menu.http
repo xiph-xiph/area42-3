@@ -1,0 +1,8 @@
+### Menu API Tests
+
+@baseUrl = http://localhost:5229/api/menu
+@token = changeme
+
+### Register - New User
+GET {{baseUrl}}
+Authorization: Bearer {{token}}
