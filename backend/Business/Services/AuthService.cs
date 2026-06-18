@@ -12,13 +12,13 @@ public class AuthService(
     ITokenGenerator tokenGenerator
 )
 {
-    private readonly IUserRepository _userRepository = userRepository;
-    private readonly IPasswordHasher _passwordHasher = passwordHasher;
-    private readonly ITokenGenerator _tokenGenerator = tokenGenerator;
+    private readonly IUserRepository userRepository = userRepository;
+    private readonly IPasswordHasher passwordHasher = passwordHasher;
+    private readonly ITokenGenerator tokenGenerator = tokenGenerator;
 
     public async Task<SuccessMessageDto> Register(RegisterDto registerDto)
     {
-        User? existingUser = await _userRepository.GetUserByEmail(registerDto.Email);
+        User? existingUser = await userRepository.GetUserByEmail(registerDto.Email);
         if (existingUser != null)
         {
             return new SuccessMessageDto
@@ -28,9 +28,9 @@ public class AuthService(
             };
         }
 
-        string hashedPassword = _passwordHasher.HashPassword(registerDto.Password);
+        string hashedPassword = passwordHasher.HashPassword(registerDto.Password);
 
-        await _userRepository.CreateUser(
+        await userRepository.CreateUser(
             new User
             {
                 Phone = registerDto.Phone,
@@ -46,7 +46,7 @@ public class AuthService(
 
     public async Task<TokenDto> Login(LoginDto loginDto)
     {
-        User? user = await _userRepository.GetUserByEmail(loginDto.Email);
+        User? user = await userRepository.GetUserByEmail(loginDto.Email);
         if (user == null)
         {
             return new TokenDto
@@ -58,7 +58,7 @@ public class AuthService(
             };
         }
 
-        bool passwordValid = _passwordHasher.VerifyPassword(loginDto.Password, user.PasswordHash);
+        bool passwordValid = passwordHasher.VerifyPassword(loginDto.Password, user.PasswordHash);
         if (!passwordValid)
         {
             return new TokenDto
@@ -70,7 +70,7 @@ public class AuthService(
             };
         }
 
-        string token = _tokenGenerator.GenerateToken(user.Id, user.Role);
+        string token = tokenGenerator.GenerateToken(user.Id, user.Role);
         return new TokenDto
         {
             Token = token,

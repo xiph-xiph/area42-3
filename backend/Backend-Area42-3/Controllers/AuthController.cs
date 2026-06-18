@@ -7,9 +7,9 @@ namespace Backend_Area42_3.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(AuthService _authService) : ControllerBase
+public class AuthController(AuthService authService) : ControllerBase
 {
-    private readonly AuthService authService = _authService;
+    private readonly AuthService authService = authService;
 
     [HttpPost("register")]
     public async Task<SuccessMessageDto> Register(RegisterDto registerDto)
