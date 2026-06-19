@@ -1,0 +1,26 @@
+.home {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.home-logo {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.home-title {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+}
+
+.home-services {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
