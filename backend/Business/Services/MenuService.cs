@@ -4,9 +4,9 @@ using Backend_Area42_3.DTO.Output;
 using Backend_Area42_3.Models;
 using Backend_Area42_3.Repositories;
 
-public class MenuService(IMenuRepository _menuRepository)
+public class MenuService(IMenuRepository menuRepository)
 {
-    private readonly IMenuRepository menuRepository = _menuRepository;
+    private readonly IMenuRepository menuRepository = menuRepository;
 
     public async Task<MenuDto> GetMenuItems()
     {
