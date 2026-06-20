@@ -80,13 +80,11 @@ function ParkOnderhoudPage() {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  <option>Verlichting</option>
-                  <option>Sanitair</option>
-                  <option>Verwarming / Airco</option>
-                  <option>TV / Internet</option>
-                  <option>Keuken</option>
-                  <option>Deur / Slot</option>
-                  <option>Overig</option>
+                  
+                  {/* opties */}
+                  <option>Electriciteit</option>
+                  <option>Internet</option>
+                  <option>Ongedierte</option>
                 </select>
               </label>
 
