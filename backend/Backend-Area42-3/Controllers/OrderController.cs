@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Backend_Area42_3.Services;
@@ -8,7 +9,7 @@ namespace Backend_Area42_3.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-class OrderController(OrderService orderService) : ControllerBase
+public class OrderController(OrderService orderService) : ControllerBase
 {
     private readonly OrderService orderService = orderService;
 
@@ -16,7 +17,8 @@ class OrderController(OrderService orderService) : ControllerBase
     [Authorize]
     public async Task<CartDto> GetCart()
     {
-        return await orderService.GetCart();
+        int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        return await orderService.GetCart(userId);
     }
 
     [HttpPost("cart/add")]
