@@ -55,8 +55,21 @@ public class OrderItemRepository(NpgsqlDataSource dataSource) : IOrderItemReposi
 		return true;
 	}
 
-	public Task<bool> DeleteItem(int orderId, int itemId)
+	public async Task<bool> DeleteItem(int orderId, int itemId)
 	{
-		throw new NotImplementedException();
+		using var connection = await dataSource.OpenConnectionAsync();
+
+		string query =
+			@"
+                DELETE FROM order_items
+                WHERE order_id = @OrderId AND item_id = @ItemId
+            ";
+
+		using var command = new NpgsqlCommand(query, connection);
+		command.Parameters.AddWithValue("@OrderId", orderId);
+		command.Parameters.AddWithValue("@ItemId", itemId);
+
+		await command.ExecuteNonQueryAsync();
+		return true;
 	}
 }

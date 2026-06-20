@@ -33,7 +33,8 @@ public class OrderController(OrderService orderService) : ControllerBase
     [Authorize]
     public async Task<SuccessMessageDto> RemoveItemFromCart(RemoveItemDto removeItemDto)
     {
-        return await orderService.RemoveItemFromCart(removeItemDto);
+        int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        return await orderService.RemoveItemFromCart(removeItemDto, userId);
     }
 
     [HttpPost("cart/checkout")]

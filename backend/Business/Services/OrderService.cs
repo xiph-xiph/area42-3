@@ -88,7 +88,47 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
 
     public async Task<SuccessMessageDto> RemoveItemFromCart(RemoveItemDto removeItemDto, int userId)
     {
-        throw new NotImplementedException();
+        var cart = await GetOrCreateCart(userId);
+        if (cart == null || cart.Id == null)
+        {
+            return new SuccessMessageDto
+            {
+                Success = false,
+                Message = "Failed to find or create cart"
+            };
+        }
+
+        foreach (var item in cart.Items)
+        {
+            if (item.Id == removeItemDto.OrderItemId)
+            {
+                int newQuantity = item.Quantity - (removeItemDto.Quantity ?? item.Quantity);
+                if (newQuantity <= 0)
+                {
+                    await orderItemRepository.DeleteItem((int)cart.Id, item.Id);
+                    return new SuccessMessageDto
+                    {
+                        Success = true,
+                        Message = "Item removed from cart successfully"
+                    };
+                }
+                else
+                {
+                    await orderItemRepository.UpdateItem((int)cart.Id, item.Id, newQuantity);
+                    return new SuccessMessageDto
+                    {
+                        Success = true,
+                        Message = "Item quantity updated in cart successfully"
+                    };
+                }
+            }
+        }
+
+        return new SuccessMessageDto
+        {
+            Success = false,
+            Message = "Item not found in cart"
+        };
     }
 
     public async Task<SuccessMessageDto> CheckoutCart()
