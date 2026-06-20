@@ -31,6 +31,15 @@ Authorization: Bearer {{token}}
 ### Checkout Cart
 POST {{baseUrl}}/cart/checkout
 Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "phone": "+31612345678",
+  "email": "john@example.com",
+  "remarks": "Extra zout en peper, graag!",
+  "pickupTime": "2026-06-20T20:30:00"
+}
 
 ### Get Orders - Regular User
 GET {{baseUrl}}
