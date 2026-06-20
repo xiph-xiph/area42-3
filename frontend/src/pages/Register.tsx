@@ -1,15 +1,15 @@
 import "./login.css";
-
 import { Link, useNavigate } from "react-router-dom";
 
 import area54Logo from "../assets/images/area54_logo.png";
 import background from "../assets/images/area54_background.png";
 
-const Login = () => {
+const Register = () => {
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        navigate("/home");
+    const handleRegister = () => {
+        alert("Account succesvol aangemaakt!");
+        navigate("/");
     };
 
     return (
@@ -21,15 +21,25 @@ const Login = () => {
 
                 <img
                     src={area54Logo}
-                    alt="Area54 Logo"
+                    alt="Area54"
                     className="login-logo"
                 />
 
-                <h2>Welkom bij Area54</h2>
+                <h2>Account aanmaken</h2>
 
                 <p className="login-subtitle">
-                    Log in om verder te gaan.
+                    Maak een account aan om gebruik te maken van Area54.
                 </p>
+
+                <input
+                    type="text"
+                    placeholder="Voor- en achternaam"
+                />
+
+                <input
+                    type="email"
+                    placeholder="E-mailadres"
+                />
 
                 <input
                     type="text"
@@ -41,16 +51,21 @@ const Login = () => {
                     placeholder="Wachtwoord"
                 />
 
+                <input
+                    type="password"
+                    placeholder="Herhaal wachtwoord"
+                />
+
                 <button
                     className="login-button"
-                    onClick={handleLogin}
+                    onClick={handleRegister}
                 >
-                    Inloggen
+                    Registreren
                 </button>
 
                 <p className="register-text">
-                    Nog geen account?{" "}
-                    <Link to="/register">Account aanmaken</Link>
+                    Heb je al een account?{" "}
+                    <Link to="/">Inloggen</Link>
                 </p>
 
             </div>
@@ -58,4 +73,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

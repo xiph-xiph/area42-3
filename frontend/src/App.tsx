@@ -8,6 +8,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import Area54 from "./pages/area54";
 import Login from "./pages/login";
+import Register from "./pages/Register";
 
 
 import ParkonderhoudPage from "./pages/ParkOnderhoudPage";
@@ -68,6 +69,8 @@ function App() {
         path="/"
         element={<Login />}
       />
+
+<Route path="/register" element={<Register />} />
 
       </Routes>
   );
