@@ -63,6 +63,21 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
             };
         }
 
+        foreach (var item in cart.Items)
+        {
+            if (item.Id == addItemDto.MenuItemId)
+            {
+                // Als het item al in de cart zit, update dan de hoeveelheid
+                int newQuantity = item.Quantity + addItemDto.Quantity;
+                await orderItemRepository.UpdateItem((int)cart.Id, item.Id, newQuantity);
+                return new SuccessMessageDto
+                {
+                    Success = true,
+                    Message = "Item quantity updated in cart successfully"
+                };
+            }
+        }
+
         await orderItemRepository.CreateItem((int)cart.Id, addItemDto.MenuItemId, addItemDto.Quantity);
         return new SuccessMessageDto
         {
