@@ -8,7 +8,6 @@ import logoImage from "../assets/logos/frame_logo_lafamiglia.png";
 
 import pizzaImage from "../assets/images/pizza-margarita.png";
 import pastaImage from "../assets/images/pasta_bolognese.png";
-import lasagneImage from "../assets/images/lasagne.png";
 import tiramisuImage from "../assets/images/tiramisu.png";
 import instagramLogo from "../assets/images/instagram-logo.png";
 
@@ -84,10 +83,6 @@ function RestaurantPage() {
               title="Tiramisu"
             />
 
-            <DishCard
-              image={lasagneImage}
-              title="Lasagne"
-            />
           </div>
         </section>
 
