@@ -3,6 +3,6 @@
 @baseUrl = http://localhost:5229/api/menu
 @token = changeme
 
-### Register - New User
+### Get Menu Items
 GET {{baseUrl}}
 Authorization: Bearer {{token}}
