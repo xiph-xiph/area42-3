@@ -62,7 +62,10 @@ public class Program
         services.AddSingleton<ITokenGenerator, JWTTokenGenerator>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IMenuRepository, MenuRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IOrderItemRepository, OrderItemRepository>();
         services.AddScoped<AuthService>();
         services.AddScoped<MenuService>();
+        services.AddScoped<OrderService>();
     }
 }
