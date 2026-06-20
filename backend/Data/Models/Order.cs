@@ -5,6 +5,9 @@ namespace Backend_Area42_3.Models;
 public class Order
 {
     public required int? Id { get; set; }
+    public required string? Name { get; set; }
+    public required string? Phone { get; set; }
+    public required string? Remarks { get; set; }
 
     public required int UserId { get; set; }
 
@@ -12,7 +15,7 @@ public class Order
 
     public required decimal TotalPrice { get; set; }
 
-    public required DateTime PickupTime { get; set; }
+    public required DateTime? PickupTime { get; set; }
 
     public required List<OrderItem> Items { get; set; }
 }
