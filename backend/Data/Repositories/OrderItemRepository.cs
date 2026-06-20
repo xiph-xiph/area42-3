@@ -9,12 +9,12 @@ public class OrderItemRepository : IOrderItemRepository
 		throw new NotImplementedException();
 	}
 
-	public Task<bool> UpdateItem(OrderItem orderItem)
+	public Task<bool> UpdateItem(int orderId, OrderItem orderItem)
 	{
 		throw new NotImplementedException();
 	}
 
-	public Task<bool> DeleteItem(int itemId)
+	public Task<bool> DeleteItem(int orderId, int itemId)
 	{
 		throw new NotImplementedException();
 	}
