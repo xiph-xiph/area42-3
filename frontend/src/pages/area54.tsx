@@ -8,6 +8,7 @@ import heroFoto54 from "../assets/images/area54_heropng.png";
 
 import instagramLogo from "../assets/images/instagram-logo.png"
 
+import background from "../assets/images/area54_background.png"
 
 
 import ServiceCard from "../components/ServiceCard";
@@ -44,17 +45,18 @@ const services = [
 const HomePageNew = () => {
     return (
         
-                <div>
+                <div className="page-background"
+                style={{ backgroundImage: `url(${background})` }}>
                     <div className="area54-container">
                     
                         <div className="logo54-container"><img src={area54Logo} alt="logo" className="logo-area54" /></div>
                     
-                        <div className="hero-container">
-                            <img src={heroFoto54} className="herofoto" alt="herofoto" />
+                        <div className="hero-container-area54">
+                            <img src={heroFoto54} className="herofoto-area54" alt="herofoto" />
                         </div>
                     
                     
-                        <p className="welcome-text"
+                        <p className="welcome-text-area54"
                         ><h3>Welkom bij vakantiepark Area54!</h3>
                              <br/>
                     

@@ -1,6 +1,9 @@
-.background-image {
+.page-background {
     min-height: 100vh;
-    background-image: url();
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .area54-container {
@@ -13,21 +16,36 @@
     margin-top: 20px;
     gap: 20px;
 
+
     text-align: center;
     font-weight: 200;
+    background-color: whitesmoke;
+    box-shadow: var(--shadow-card);
 
+
+}
+
+.hero-container-area54 {
+    width: 100%;
+}
+
+.logo54-container {
+    margin-top: 20px;
 }
 
 .logo-area54 {
     max-width: 300px;
     aspect-ratio: auto;
+    margin-top: 20px;
 }
 
-.welcome-text {
+
+
+.welcome-text-area54 {
     text-align: center;
 }
 
-.herofoto {
+.herofoto-area54 {
     width: 100%;
     height: auto;
 }

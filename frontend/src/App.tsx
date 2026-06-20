@@ -7,16 +7,17 @@ import SnackMenuPage from "./pages/SnackMenuPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 import Area54 from "./pages/area54";
+import Login from "./pages/login";
 
 
-import ParkonderhoudPage from "./pages/ParkOnderhoudpage";
+import ParkonderhoudPage from "./pages/ParkOnderhoudPage";
 import MenuPage from "./pages/MenuPage";
 import ReservationPage from "./pages/ReservationPagse";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Area54 />} />
+      <Route path="/home" element={<Area54 />} />
 
       <Route
         path="/restaurant"
@@ -63,10 +64,12 @@ function App() {
         element={<Area54 />}
       />
 
+<Route
+        path="/"
+        element={<Login />}
+      />
 
-
-
-    </Routes>
+      </Routes>
   );
 }
 
