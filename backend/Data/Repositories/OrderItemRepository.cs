@@ -1,15 +1,42 @@
 using Backend_Area42_3.Models;
+using Npgsql;
 
 namespace Backend_Area42_3.Repositories;
 
-public class OrderItemRepository : IOrderItemRepository
+public class OrderItemRepository(NpgsqlDataSource dataSource) : IOrderItemRepository
 {
-	public Task<int> CreateItem(int orderId, OrderItem orderItem)
+	private readonly NpgsqlDataSource dataSource = dataSource;
+
+	public async Task<bool> CreateItem(int orderId, int menuItemId, int quantity)
 	{
-		throw new NotImplementedException();
+		using var connection = await dataSource.OpenConnectionAsync();
+
+		string query =
+			@"
+                INSERT INTO order_items
+                (
+                    order_id,
+					item_id,
+					quantity
+                )
+                VALUES
+                (
+                    @OrderId,
+                    @ItemId,
+                    @Quantity
+                )
+            ";
+
+		using var command = new NpgsqlCommand(query, connection);
+		command.Parameters.AddWithValue("@OrderId", orderId);
+		command.Parameters.AddWithValue("@ItemId", menuItemId);
+		command.Parameters.AddWithValue("@Quantity", quantity);
+
+		await command.ExecuteNonQueryAsync();
+		return true;
 	}
 
-	public Task<bool> UpdateItem(int orderId, OrderItem orderItem)
+	public Task<bool> UpdateItem(int orderId, int itemId, int newQuantity)
 	{
 		throw new NotImplementedException();
 	}

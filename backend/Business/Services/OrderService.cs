@@ -51,12 +51,27 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
         return orderId > 0;
     }
 
-    public async Task<SuccessMessageDto> AddItemToCart(AddItemDto addItemDto)
+    public async Task<SuccessMessageDto> AddItemToCart(AddItemDto addItemDto, int userId)
     {
-        throw new NotImplementedException();
+        var cart = await GetOrCreateCart(userId);
+        if (cart == null || cart.Id == null)
+        {
+            return new SuccessMessageDto
+            {
+                Success = false,
+                Message = "Failed to find or create cart"
+            };
+        }
+
+        await orderItemRepository.CreateItem((int)cart.Id, addItemDto.MenuItemId, addItemDto.Quantity);
+        return new SuccessMessageDto
+        {
+            Success = true,
+            Message = "Item added to cart successfully"
+        };
     }
 
-    public async Task<SuccessMessageDto> RemoveItemFromCart(RemoveItemDto removeItemDto)
+    public async Task<SuccessMessageDto> RemoveItemFromCart(RemoveItemDto removeItemDto, int userId)
     {
         throw new NotImplementedException();
     }

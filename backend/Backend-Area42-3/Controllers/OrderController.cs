@@ -25,7 +25,8 @@ public class OrderController(OrderService orderService) : ControllerBase
     [Authorize]
     public async Task<SuccessMessageDto> AddItemToCart(AddItemDto addItemDto)
     {
-        return await orderService.AddItemToCart(addItemDto);
+        int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        return await orderService.AddItemToCart(addItemDto, userId);
     }
 
     [HttpPost("cart/remove")]
