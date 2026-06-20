@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Backend_Area42_3.Repositories
+using Backend_Area42_3.Models;
+
+namespace Backend_Area42_3.Repositories;
+
+public interface IReservationRepo
 {
-    internal class IReservationRepo
-    {
-    }
+    Task<List<Reservation>> GetAll();
+    Task<Reservation?> GetById(int id);
+    Task Add(Reservation reservation);
 }
