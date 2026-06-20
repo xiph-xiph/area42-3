@@ -1,22 +1,22 @@
 .menu-category {
-    margin-bottom: 2rem;
-  }
-  
-  .menu-category h2 {
-    text-align: center;
-  
-    color: white;
-  
-    font-style: italic;
-    font-weight: 400;
-  
-    margin-bottom: 1rem;
-  }
-  
-  .menu-category-card {
-    background-color: #a5a084;
-  
-    border-radius: 32px;
-  
-    padding: 2rem;
-  }
+  margin-bottom: 2rem;
+}
+
+.menu-category h2 {
+  text-align: center;
+
+  color: white;
+
+  font-style: italic;
+  font-weight: 400;
+
+  margin-bottom: 1rem;
+}
+
+.menu-category-card {
+  background-color: #a5a084;
+
+  border-radius: 32px;
+
+  padding: 2rem;
+}

@@ -8,7 +8,6 @@ function OrderConfirmationPage() {
   return (
     <main className="order-confirmation-page">
       <div className="order-confirmation-container">
-
         <h1>✅ Bedankt voor uw bestelling!</h1>
 
         <p className="confirmation-text">
@@ -20,11 +19,7 @@ function OrderConfirmationPage() {
         </p>
 
         <div className="confirmation-buttons">
-
-          <button
-            className="confirmation-button"
-            onClick={() => navigate("/")}
-          >
+          <button className="confirmation-button" onClick={() => navigate("/")}>
             Terug naar Home
           </button>
 
@@ -34,9 +29,7 @@ function OrderConfirmationPage() {
           >
             Nog een bestelling plaatsen
           </button>
-
         </div>
-
       </div>
     </main>
   );

@@ -12,10 +12,7 @@ type MenuCategoryProps = {
   items: Item[];
 };
 
-function MenuCategory({
-  title,
-  items,
-}: MenuCategoryProps) {
+function MenuCategory({ title, items }: MenuCategoryProps) {
   return (
     <section className="menu-category">
       <h2>{title}</h2>

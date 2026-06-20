@@ -28,14 +28,14 @@ function ParkOnderhoudPage() {
   return (
     <main className="maintenance-page">
       <div className="maintenance-container">
-
         <h1>🔧 Parkonderhoud</h1>
 
         <p className="maintenance-subtitle">
-          Heeft u een technische storing? Via het onderstaande formulier kun je eenvoudig een technische storing melden. Of het nu gaat om je accommodatie of een voorziening op het park, ons onderhoudsteam gaat er zo snel mogelijk mee aan de slag.
+          Heeft u een technische storing? Via het onderstaande formulier kun je
+          eenvoudig een technische storing melden. Of het nu gaat om je
+          accommodatie of een voorziening op het park, ons onderhoudsteam gaat
+          er zo snel mogelijk mee aan de slag.
         </p>
-
-        
 
         {submitted ? (
           <div className="maintenance-success">
@@ -46,7 +46,6 @@ function ParkOnderhoudPage() {
         ) : (
           <>
             <section className="maintenance-section">
-
               <label>
                 Naam
                 <input
@@ -80,7 +79,6 @@ function ParkOnderhoudPage() {
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  
                   {/* opties */}
                   <option>Electriciteit</option>
                   <option>Internet</option>
@@ -97,11 +95,9 @@ function ParkOnderhoudPage() {
                   placeholder="Beschrijf de storing..."
                 />
               </label>
-
             </section>
 
             <section className="maintenance-section">
-
               <h2>Urgentie</h2>
 
               <label className="radio-option">
@@ -133,18 +129,13 @@ function ParkOnderhoudPage() {
                 />
                 Hoog
               </label>
-
             </section>
 
-            <button
-              className="maintenance-button"
-              onClick={handleSubmit}
-            >
+            <button className="maintenance-button" onClick={handleSubmit}>
               Storing verzenden
             </button>
           </>
         )}
-
       </div>
     </main>
   );

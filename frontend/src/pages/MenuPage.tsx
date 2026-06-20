@@ -6,7 +6,7 @@ import { menuCategories } from "../data/menuData";
 
 import BackButton from "../components/BackButton";
 
-//  API functies 
+//  API functies
 
 function MenuPage() {
   const [activeCategory, setActiveCategory] = useState(menuCategories[0].id);
@@ -35,7 +35,7 @@ function MenuPage() {
       },
       {
         threshold: 0.4,
-      }
+      },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -48,11 +48,7 @@ function MenuPage() {
   return (
     <main className="menu-page">
       <div className="menu-container">
-     
-      <BackButton
-  to="/restaurant"
-  label="Terug naar restaurant"
-/>
+        <BackButton to="/restaurant" label="Terug naar restaurant" />
 
         <nav className="menu-navigation">
           {menuCategories.map((category) => (
@@ -67,14 +63,8 @@ function MenuPage() {
         </nav>
 
         {menuCategories.map((category) => (
-          <section
-            key={category.id}
-            id={category.id}
-          >
-            <MenuCategory
-              title={category.title}
-              items={category.items}
-            />
+          <section key={category.id} id={category.id}>
+            <MenuCategory title={category.title} items={category.items} />
           </section>
         ))}
       </div>
