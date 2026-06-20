@@ -200,11 +200,23 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
 
     public async Task<OrderListDto> GetAllOrders()
     {
-        throw new NotImplementedException();
+        var orders = await orderRepository.GetAllOrders();
+        return new OrderListDto
+        {
+            Success = true,
+            Message = "Orders retrieved successfully",
+            Orders = orders
+        };
     }
 
-    public async Task<OrderListDto> GetUserOrders()
+    public async Task<OrderListDto> GetUserOrders(int userId)
     {
-        throw new NotImplementedException();
+        var orders = await orderRepository.GetOrdersByUserId(userId);
+        return new OrderListDto
+        {
+            Success = true,
+            Message = "Orders retrieved successfully",
+            Orders = orders
+        };
     }
 }

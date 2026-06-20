@@ -56,7 +56,8 @@ public class OrderController(OrderService orderService) : ControllerBase
         }
         else
         {
-            return await orderService.GetUserOrders();
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+            return await orderService.GetUserOrders(userId);
         }
     }
 }
