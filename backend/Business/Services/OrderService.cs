@@ -70,6 +70,7 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
                 // Als het item al in de cart zit, update dan de hoeveelheid
                 int newQuantity = item.Quantity + addItemDto.Quantity;
                 await orderItemRepository.UpdateItem((int)cart.Id, item.Id, newQuantity);
+                await UpdateOrderTotal((int)cart.Id);
                 return new SuccessMessageDto
                 {
                     Success = true,
@@ -79,6 +80,7 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
         }
 
         await orderItemRepository.CreateItem((int)cart.Id, addItemDto.MenuItemId, addItemDto.Quantity);
+        await UpdateOrderTotal((int)cart.Id);
         return new SuccessMessageDto
         {
             Success = true,
@@ -106,6 +108,7 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
                 if (newQuantity <= 0)
                 {
                     await orderItemRepository.DeleteItem((int)cart.Id, item.Id);
+                    await UpdateOrderTotal((int)cart.Id);
                     return new SuccessMessageDto
                     {
                         Success = true,
@@ -115,6 +118,7 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
                 else
                 {
                     await orderItemRepository.UpdateItem((int)cart.Id, item.Id, newQuantity);
+                    await UpdateOrderTotal((int)cart.Id);
                     return new SuccessMessageDto
                     {
                         Success = true,
@@ -131,7 +135,26 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
         };
     }
 
-    public async Task<SuccessMessageDto> CheckoutCart()
+    private async Task<bool> UpdateOrderTotal(int orderId)
+    {
+        var order = await orderRepository.GetOrder(orderId);
+        if (order == null)
+        {
+            return false;
+        }
+
+        decimal totalPrice = 0;
+        foreach (var item in order.Items)
+        {
+            totalPrice += item.Price * item.Quantity;
+        }
+        order.TotalPrice = totalPrice;
+
+        await orderRepository.UpdateOrder(order);
+        return true;
+    }
+
+    public async Task<SuccessMessageDto> CheckoutCart(CheckoutDto checkoutDto, int userId)
     {
         throw new NotImplementedException();
     }
