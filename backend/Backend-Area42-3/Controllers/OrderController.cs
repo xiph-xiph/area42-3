@@ -39,9 +39,10 @@ public class OrderController(OrderService orderService) : ControllerBase
 
     [HttpPost("cart/checkout")]
     [Authorize]
-    public async Task<SuccessMessageDto> CheckoutCart()
+    public async Task<SuccessMessageDto> CheckoutCart(CheckoutDto checkoutDto)
     {
-        return await orderService.CheckoutCart();
+        int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        return await orderService.CheckoutCart(checkoutDto, userId);
     }
 
     [HttpGet]

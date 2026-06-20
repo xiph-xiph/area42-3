@@ -42,10 +42,13 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
             new Order
             {
                 Id = null,
+                Name = null,
+                Phone = null,
+                Remarks = null,
                 UserId = userId,
                 Status = Enums.OrderStatus.Cart,
                 TotalPrice = 0,
-                PickupTime = DateTime.Now,
+                PickupTime = null,
                 Items = []
             });
         return orderId > 0;
@@ -156,7 +159,43 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
 
     public async Task<SuccessMessageDto> CheckoutCart(CheckoutDto checkoutDto, int userId)
     {
-        throw new NotImplementedException();
+        var cart = await GetOrCreateCart(userId);
+
+        if (cart == null || cart.Id == null)
+        {
+            return new SuccessMessageDto
+            {
+                Success = false,
+                Message = "Failed to find or create cart"
+            };
+        }
+
+        if (cart.Items.Count == 0)
+        {
+            return new SuccessMessageDto
+            {
+                Success = false,
+                Message = "Cart is empty"
+            };
+        }
+
+        await orderRepository.UpdateOrder(new Order
+        {
+            Id = cart.Id,
+            Name = checkoutDto.Name,
+            Phone = checkoutDto.Phone,
+            Remarks = checkoutDto.Remarks,
+            UserId = userId,
+            Status = Enums.OrderStatus.Scheduled,
+            TotalPrice = cart.TotalPrice,
+            PickupTime = checkoutDto.PickupTime,
+            Items = cart.Items
+        });
+        return new SuccessMessageDto
+        {
+            Success = true,
+            Message = "Checkout successful"
+        };
     }
 
     public async Task<OrderListDto> GetAllOrders()
