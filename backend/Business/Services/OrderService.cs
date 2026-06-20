@@ -12,27 +12,28 @@ public class OrderService(IOrderRepository orderRepository, IOrderItemRepository
 
     public async Task<CartDto> GetCart(int userId)
     {
-        var cart = await orderRepository.GetCart(userId);
-        if (cart == null)
-        {
-            var created = await CreateCart(userId);
-            if (!created)
-            {
-                return new CartDto
-                {
-                    Success = false,
-                    Message = "Failed to create a new cart",
-                    Cart = null
-                };
-            }
-            cart = await orderRepository.GetCart(userId);
-        }
+        var cart = await GetOrCreateCart(userId);
         return new CartDto
         {
             Success = cart != null,
             Message = cart != null ? "Cart retrieved successfully" : "No cart found",
             Cart = cart
         };
+    }
+
+    private async Task<Cart?> GetOrCreateCart(int userId)
+    {
+        var cart = await orderRepository.GetCart(userId);
+        if (cart == null)
+        {
+            var created = await CreateCart(userId);
+            if (!created)
+            {
+                return null;
+            }
+            cart = await orderRepository.GetCart(userId);
+        }
+        return cart;
     }
 
     private async Task<bool> CreateCart(int userId)
