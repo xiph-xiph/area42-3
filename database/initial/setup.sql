@@ -62,10 +62,10 @@ CREATE TABLE reservations (
 );
 
 CREATE TYPE order_status AS ENUM (
-    'Cart',
-    'Scheduled',
-    'Completed',
-    'Cancelled'
+    'cart',
+    'scheduled',
+    'completed',
+    'cancelled'
 );
 
 CREATE TABLE takeaway_orders (
