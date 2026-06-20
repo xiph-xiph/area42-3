@@ -8,11 +8,7 @@ import friesImage from "../assets/images/snackhoek_background_opacity_50.png";
 import frikandelImage from "../assets/images/snackhoek_frikandel.png";
 import hamburgerImage from "../assets/images/snackhoek_hamburger.png";
 
-
-
 export const snackProducts: SnackProduct[] = [
- 
-
   {
     id: 1,
     title: "Friet",

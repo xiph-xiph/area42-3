@@ -1,25 +1,25 @@
 .back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  
-    margin-bottom: 2rem;
-  
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-  
-    transition:
-      opacity 0.2s ease,
-      transform 0.2s ease;
-  }
-  
-  .back-button:hover {
-    opacity: 0.8;
-  
-    transform: translateX(-2px);
-  }
-  
-  .back-button-icon {
-    font-size: 1.2rem;
-  }
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  margin-bottom: 2rem;
+
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  opacity: 0.8;
+
+  transform: translateX(-2px);
+}
+
+.back-button-icon {
+  font-size: 1.2rem;
+}

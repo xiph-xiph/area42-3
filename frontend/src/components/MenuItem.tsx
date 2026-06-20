@@ -6,11 +6,7 @@ type MenuItemProps = {
   price: string;
 };
 
-function MenuItem({
-  name,
-  description,
-  price,
-}: MenuItemProps) {
+function MenuItem({ name, description, price }: MenuItemProps) {
   return (
     <article className="menu-item">
       <div className="menu-item-header">

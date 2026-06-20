@@ -44,7 +44,7 @@
   justify-content: space-between;
   align-items: center;
 
-  padding-bottom: .75rem;
+  padding-bottom: 0.75rem;
 
   border-bottom: 1px solid #ececec;
 }
@@ -56,7 +56,7 @@
 .shopping-cart-actions {
   display: flex;
   align-items: center;
-  gap: .75rem;
+  gap: 0.75rem;
 }
 
 .shopping-cart-actions button {
@@ -96,7 +96,7 @@
 .shopping-cart-button {
   width: 100%;
 
-  padding: .9rem;
+  padding: 0.9rem;
 
   border: none;
 
@@ -116,5 +116,5 @@
 }
 
 .shopping-cart-button:hover {
-  opacity: .9;
+  opacity: 0.9;
 }

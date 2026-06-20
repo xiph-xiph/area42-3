@@ -1,28 +1,27 @@
 .reservation-page {
-    min-height: 100vh;
-    background-color: var(--restaurant-color);
+  min-height: 100vh;
+  background-color: var(--restaurant-color);
 
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-
-    padding: 2rem 1rem;
+  padding: 2rem 1rem;
 }
 
 .reservation-container {
-    width: 100%;
-    max-width: 760px;
+  width: 100%;
+  max-width: 760px;
 
-    color: white;
+  color: white;
 }
 
 .reservation-container h1 {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 
-    font-size: 2rem;
-    font-weight: 600;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .reservation-container p {
-    line-height: 1.6;
+  line-height: 1.6;
 }
