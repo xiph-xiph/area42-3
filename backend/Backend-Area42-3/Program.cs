@@ -62,5 +62,12 @@ public class Program
         services.AddSingleton<ITokenGenerator, JWTTokenGenerator>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<AuthService>();
+        // ===== RESTAURANT - ADO =====
+        services.AddScoped<IReservationRepo, ReservationRepo>();
+        services.AddScoped<ITableRepo, TableRepo>();
+        services.AddScoped<ReservationService>();
+        services.AddScoped<TableService>();
+        // ===== RESTAURANT - ADO =====
+
     }
 }
