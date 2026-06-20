@@ -4,7 +4,7 @@ namespace Backend_Area42_3.Models;
 
 public class Order
 {
-    public required int Id { get; set; }
+    public required int? Id { get; set; }
 
     public required int UserId { get; set; }
 
