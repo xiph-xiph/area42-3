@@ -1,0 +1,41 @@
+### Order API Tests
+
+@baseUrl = http://localhost:5229/api/order
+@token = changeme
+@adminToken = changeme
+
+### Get Cart
+GET {{baseUrl}}/cart
+Authorization: Bearer {{token}}
+
+### Add Item To Cart
+POST {{baseUrl}}/cart/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+	"menuItemId": 1,
+	"quantity": 2
+}
+
+### Remove Item From Cart
+POST {{baseUrl}}/cart/remove
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+	"orderItemId": 1,
+	"quantity": 1
+}
+
+### Checkout Cart
+POST {{baseUrl}}/cart/checkout
+Authorization: Bearer {{token}}
+
+### Get Orders - Regular User
+GET {{baseUrl}}
+Authorization: Bearer {{token}}
+
+### Get Orders - Admin User
+GET {{baseUrl}}
+Authorization: Bearer {{adminToken}}
