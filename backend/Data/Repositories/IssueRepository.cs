@@ -13,7 +13,7 @@ public class IssueRepository(NpgsqlDataSource dataSource) : IIssueRepository
 
         string query =
             @"
-                INSERT INTO takeaway_orders
+                INSERT INTO issues
                 (
                     user_id,
                     priority,
@@ -27,8 +27,13 @@ public class IssueRepository(NpgsqlDataSource dataSource) : IIssueRepository
                 VALUES
                 (
                     @UserId,
-                    @Status::order_status,
-                    @TotalPrice
+                    @Priority,
+                    @Category,
+                    @Name,
+                    @Description,
+                    @CreationDate,
+                    @SolvedDate,
+                    @Solved
                 )
                 RETURNING id;
             ";
@@ -49,14 +54,11 @@ public class IssueRepository(NpgsqlDataSource dataSource) : IIssueRepository
 
     //public async Task<Issue?> UpdateIssue(Issue oldIssue, Issue newIssue)
     //{
-    //    return newIssue;
     //}
     //public async Task<Issue?> GetIssueById(Issue test)
     //{
-    //    return test;
     //}
     //public async Task<List<Issue?>> GetAll()
     //{
-    //    return <List<Issue test >>;
     //}
 }
