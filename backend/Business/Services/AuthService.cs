@@ -28,6 +28,15 @@ public class AuthService(
             };
         }
 
+        if (PasswordIsWeak(registerDto.Password))
+        {
+            return new SuccessMessageDto
+            {
+                Success = false,
+                Message = "Wachtwoord voldoet niet aan de vereisten.",
+            };
+        }
+
         string hashedPassword = passwordHasher.HashPassword(registerDto.Password);
 
         await userRepository.CreateUser(
@@ -42,6 +51,41 @@ public class AuthService(
         );
 
         return new SuccessMessageDto { Success = true, Message = "Registratie geslaagd." };
+    }
+
+    private static bool PasswordIsWeak(string password)
+    {
+        // Check if the password is at least 8 characters long
+        if (password.Length < 8)
+        {
+            return true;
+        }
+
+        // Check if the password contains at least one uppercase letter
+        if (!password.Any(char.IsUpper))
+        {
+            return true;
+        }
+
+        // Check if the password contains at least one lowercase letter
+        if (!password.Any(char.IsLower))
+        {
+            return true;
+        }
+
+        // Check if the password contains at least one digit
+        if (!password.Any(char.IsDigit))
+        {
+            return true;
+        }
+
+        // Check if the password contains at least one special character
+        if (!password.Any(ch => !char.IsLetterOrDigit(ch)))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public async Task<TokenDto> Login(LoginDto loginDto)
