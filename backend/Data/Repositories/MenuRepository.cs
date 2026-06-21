@@ -12,7 +12,7 @@ public class MenuRepository(NpgsqlDataSource dataSource) : IMenuRepository
         using var connection = await dataSource.OpenConnectionAsync();
 
         string query =
-            "SELECT id, price, name, description FROM menu_items";
+            "SELECT id, title, price, image_url, category, is_popular FROM menu_items";
         using var command = new NpgsqlCommand(query, connection);
 
         using var reader = await command.ExecuteReaderAsync();
@@ -22,9 +22,11 @@ public class MenuRepository(NpgsqlDataSource dataSource) : IMenuRepository
             menuItems.Add(new MenuItem
             {
                 Id = reader.GetInt32(0),
-                Price = reader.GetDecimal(1),
-                Name = reader.GetString(2),
-                Description = reader.GetString(3)
+                Title = reader.GetString(1),
+                Price = reader.GetDecimal(2),
+                ImageUrl = reader.GetString(3),
+                Category = reader.GetString(4),
+                IsPopular = reader.GetBoolean(5)
             });
         }
         return menuItems;
