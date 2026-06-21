@@ -8,10 +8,9 @@ import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getMenu } from "../services/menuService";
-import { getCart, addToCart, removeFromCart } from "../services/orderService";
 
 import SnackProductCard from "../components/SnackProductCard";
-import type { OrderItem } from "../types/CartDto";
+import type { CartItem } from "../types/CartItem";
 import ShoppingCart from "../components/ShoppingCart";
 import type { MenuItem } from "../types/MenuDto";
 
@@ -25,8 +24,7 @@ function SnackMenuPage() {
   ======================================== */
 
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [cart, setCart] = useState<OrderItem[]>([]);
-  const [refreshCart, setRefreshCart] = useState(false);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,12 +32,6 @@ function SnackMenuPage() {
       setMenuItems(data.menu);
     });
   }, []);
-
-  useEffect(() => {
-    getCart().then((data) => {
-      setCart(data.cart.items);
-    });
-  }, [refreshCart]);
 
   /* ========================================
      CONSTANTS
@@ -53,14 +45,46 @@ function SnackMenuPage() {
      WINKELWAGEN
   ======================================== */
 
-  const handleAddToCart = async (product: MenuItem) => {
-    await addToCart(product.id, 1);
-    setRefreshCart((prev) => !prev);
+  const addToCart = (product: MenuItem) => {
+    setCart((current) => {
+      const existingItem = current.find((item) => item.id === product.id);
+
+      if (existingItem) {
+        return current.map((item) =>
+          item.id === product.id
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+              }
+            : item,
+        );
+      }
+
+      return [
+        ...current,
+        {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          quantity: 1,
+        },
+      ];
+    });
   };
 
-  const handleRemoveFromCart = async (productId: number) => {
-    await removeFromCart(productId, 1);
-    setRefreshCart((prev) => !prev);
+  const removeFromCart = (productId: number) => {
+    setCart((current) =>
+      current
+        .map((item) =>
+          item.id === productId
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
+            : item,
+        )
+        .filter((item) => item.quantity > 0),
+    );
   };
 
   /* ========================================
@@ -137,8 +161,8 @@ function SnackMenuPage() {
                     title={product.title}
                     price={product.price}
                     quantity={getQuantity(product.id)}
-                    onAdd={() => handleAddToCart(product)}
-                    onRemove={() => handleRemoveFromCart(product.id)}
+                    onAdd={() => addToCart(product)}
+                    onRemove={() => removeFromCart(product.id)}
                   />
                 ))}
             </div>
@@ -155,10 +179,10 @@ function SnackMenuPage() {
             const product = menuItems.find((p) => p.id === id);
 
             if (product) {
-              handleAddToCart(product);
+              addToCart(product);
             }
           }}
-          onRemove={handleRemoveFromCart}
+          onRemove={removeFromCart}
           onCheckout={() =>
             navigate("/snackhoek/checkout", {
               state: { cart },
