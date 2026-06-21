@@ -10,7 +10,7 @@ public class Reservation
 {
     public int Id { get; set; }
     public int UserId { get; set; }
-    public int TafelId { get; set; }
+    public int TableId { get; set; }
     public DateTime StartDate { get; set; }
     public int Amount { get; set; }
     public Restaurant Restaurant { get; set; }

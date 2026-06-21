@@ -1,25 +1,19 @@
-﻿
-using Backend_Area42_3.Repositories;
+﻿using Backend_Area42_3.Repositories;
 using Backend_Area42_3.Models;
 
 namespace Backend_Area42_3.Services;
 
-public class TableService
+public class TableService(ITableRepo tableRepo)
 {
-    private readonly ITableRepo _tableRepo;
+    private readonly ITableRepo _tableRepo = tableRepo;
 
-    public TableService(ITableRepo tableRepo)
+    public async Task<List<Table>> GetAll()
     {
-        _tableRepo = tableRepo;
+        return await _tableRepo.GetAll();
     }
 
-    public List<Table> GetAll()
+    public async Task<Table?> GetById(int id)
     {
-        throw new NotImplementedException();
-    }
-
-    public Table? GetById(int id)
-    {
-        throw new NotImplementedException();
+        return await _tableRepo.GetById(id);
     }
 }

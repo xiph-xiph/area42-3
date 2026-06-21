@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Backend_Area42_3.Services;
 using Backend_Area42_3.DTO.Output;
 
@@ -7,28 +6,26 @@ namespace Backend_Area42_3.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TableController : ControllerBase
+public class TableController(TableService tableService, ReservationService reservationService) : ControllerBase
 {
-    private readonly TableService _tableService;
-    private readonly ReservationService _reservationService;
-
-    public TableController(TableService tableService, ReservationService reservationService)
-    {
-        _tableService = tableService;
-        _reservationService = reservationService;
-    }
+    private readonly TableService _tableService = tableService;
+    private readonly ReservationService _reservationService = reservationService;
 
     [HttpGet]
-    public ActionResult<List<TableDto>> GetTables(DateTime date)
+    public async Task<ActionResult<List<TableDto>>> GetTables(DateTime date)
     {
-        var tables = _tableService.GetAll();
+        var tables = await _tableService.GetAll();
+        var result = new List<TableDto>();
 
-        var result = tables.Select(t => new TableDto
+        foreach (var t in tables)
         {
-            Table = t,
-            IsAvailable = _reservationService.CheckAvailability(t.Id, date),
-            AvailableSlots = _reservationService.GetAvailableSlots(t.Id, date)
-        }).ToList();
+            result.Add(new TableDto
+            {
+                Table = t,
+                IsAvailable = await _reservationService.CheckAvailability(t.Id, date),
+                AvailableSlots = await _reservationService.GetAvailableSlots(t.Id, date)
+            });
+        }
 
         return Ok(result);
     }
