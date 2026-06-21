@@ -3,7 +3,6 @@
 ======================================== */
 
 .checkout-page {
-
   min-height: 100vh;
 
   background: var(--snack-primary);
@@ -13,7 +12,6 @@
   justify-content: center;
 
   padding: 2rem 1rem;
-
 }
 
 /* ========================================
@@ -21,7 +19,6 @@
 ======================================== */
 
 .checkout-container {
-
   width: 100%;
 
   max-width: 760px;
@@ -33,7 +30,6 @@
   padding: 2rem;
 
   box-shadow: var(--shadow-card);
-
 }
 
 /* ========================================
@@ -41,21 +37,17 @@
 ======================================== */
 
 .checkout-container h1 {
-
   text-align: center;
 
-  margin-bottom: .5rem;
-
+  margin-bottom: 0.5rem;
 }
 
 .checkout-subtitle {
-
   text-align: center;
 
   margin-bottom: 2rem;
 
   color: #666;
-
 }
 
 /* ========================================
@@ -63,29 +55,23 @@
 ======================================== */
 
 .checkout-section {
-
   margin-bottom: 2rem;
-
 }
 
 .checkout-section h2 {
-
   margin-bottom: 1rem;
 
   color: var(--snack-primary);
-
 }
 
 .checkout-section label {
-
   display: flex;
 
   flex-direction: column;
 
-  gap: .4rem;
+  gap: 0.4rem;
 
   margin-bottom: 1rem;
-
 }
 
 /* ========================================
@@ -94,23 +80,19 @@
 
 input,
 textarea {
-
   width: 100%;
 
-  padding: .9rem;
+  padding: 0.9rem;
 
   border: 1px solid #ddd;
 
   border-radius: var(--radius-small);
 
   font-family: inherit;
-
 }
 
 textarea {
-
   resize: vertical;
-
 }
 
 /* ========================================
@@ -118,27 +100,21 @@ textarea {
 ======================================== */
 
 .radio-option {
-
   display: flex !important;
 
   flex-direction: row !important;
 
   align-items: center;
 
-  gap: .75rem;
-
+  gap: 0.75rem;
 }
 
 .radio-option input {
-
   width: auto;
-
 }
 
 .time-input {
-
-  margin-top: .5rem;
-
+  margin-top: 0.5rem;
 }
 
 /* ========================================
@@ -146,7 +122,6 @@ textarea {
 ======================================== */
 
 .order-placeholder {
-
   padding: 1rem;
 
   background: #f8f8f8;
@@ -154,7 +129,6 @@ textarea {
   border-radius: var(--radius-small);
 
   color: #666;
-
 }
 
 /* ========================================
@@ -162,7 +136,6 @@ textarea {
 ======================================== */
 
 .checkout-button {
-
   width: 100%;
 
   padding: 1rem;
@@ -182,11 +155,8 @@ textarea {
   cursor: pointer;
 
   transition: var(--transition);
-
 }
 
 .checkout-button:hover {
-
-  opacity: .9;
-
+  opacity: 0.9;
 }

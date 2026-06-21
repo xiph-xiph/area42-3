@@ -3,14 +3,14 @@
 ======================================== */
 
 import "./ShoppingCart.css";
-import type { CartItem } from "../types/CartItem";
+import type { OrderItem } from "../types/CartDto";
 
 /* ========================================
    PROPS
 ======================================== */
 
 type ShoppingCartProps = {
-  cart: CartItem[];
+  cart: OrderItem[];
   onAdd: (id: number) => void;
   onRemove: (id: number) => void;
   onCheckout: () => void;
@@ -30,14 +30,11 @@ function ShoppingCart({
      BEREKENINGEN
   ======================================== */
 
-  const totalItems = cart.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
   const totalPrice = cart.reduce(
     (total, item) => total + item.quantity * item.price,
-    0
+    0,
   );
 
   if (cart.length === 0) {
@@ -50,31 +47,22 @@ function ShoppingCart({
 
   return (
     <aside className="shopping-cart">
-      <h2 className="shopping-cart-title">
-        🛒 Winkelwagen
-      </h2>
+      <h2 className="shopping-cart-title">🛒 Winkelwagen</h2>
 
       <div className="shopping-cart-items">
         {cart.map((item) => (
-          <div
-            key={item.id}
-            className="shopping-cart-item"
-          >
+          <div key={item.id} className="shopping-cart-item">
             <div>
               <strong>{item.title}</strong>
               <p>€ {item.price.toFixed(2).replace(".", ",")}</p>
             </div>
 
             <div className="shopping-cart-actions">
-              <button onClick={() => onRemove(item.id)}>
-                −
-              </button>
+              <button onClick={() => onRemove(item.id)}>−</button>
 
               <span>{item.quantity}</span>
 
-              <button onClick={() => onAdd(item.id)}>
-                +
-              </button>
+              <button onClick={() => onAdd(item.id)}>+</button>
             </div>
           </div>
         ))}
@@ -84,15 +72,10 @@ function ShoppingCart({
         <div className="shopping-cart-total">
           <span>{totalItems} artikelen</span>
 
-          <strong>
-            € {totalPrice.toFixed(2).replace(".", ",")}
-          </strong>
+          <strong>€ {totalPrice.toFixed(2).replace(".", ",")}</strong>
         </div>
 
-        <button
-          className="shopping-cart-button"
-          onClick={onCheckout}
-        >
+        <button className="shopping-cart-button" onClick={onCheckout}>
           Afrekenen
         </button>
       </div>

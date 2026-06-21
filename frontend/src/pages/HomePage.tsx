@@ -12,8 +12,6 @@ import famigliaLogo from "../assets/logos/frame_logo_lafamiglia.png";
 import snackhoekLogo from "../assets/logos/frame_snackbar_logo.png";
 import parkonderhoudLogo from "../assets/logos/parkonderhoud_logo.png";
 
-
-
 const services = [
   {
     id: 1,
@@ -38,17 +36,10 @@ const services = [
 const HomePage = () => {
   return (
     <main className="home">
-      <img
-        src={area54Logo}
-        alt="Area54"
-        className="home-logo"
-      />
+      <img src={area54Logo} alt="Area54" className="home-logo" />
 
-      <h1 className="home-title">
-        Welkom
-      </h1>
+      <h1 className="home-title">Welkom</h1>
 
-   
       <section className="home-services">
         {services.map((service) => (
           <ServiceCard

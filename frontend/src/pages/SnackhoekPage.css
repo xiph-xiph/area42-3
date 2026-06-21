@@ -1,200 +1,190 @@
 .snackhoek-page {
-    min-height: 100vh;
-    background: var(--snack-primary);
-    font-family: var(--font-snackhoek);
-  
-    display: flex;
-    justify-content: center;
-  }
-  
-  .snackhoek-container {
-    width: 100%;
-    max-width: 400px;
-    background: var(--snack-primary);
-  }
-  
-  /* ========================================
+  min-height: 100vh;
+  background: var(--snack-primary);
+  font-family: var(--font-snackhoek);
+
+  display: flex;
+  justify-content: center;
+}
+
+.snackhoek-container {
+  width: 100%;
+  max-width: 400px;
+  background: var(--snack-primary);
+}
+
+/* ========================================
      HERO
   ======================================== */
-  
-  .snack-hero {
-    position: relative;
-    width: 100%;
-  }
-  
-  .snack-hero-image {
-    width: 100%;
-    height: 305px;
-    object-fit: cover;
-  }
-  
-  .snack-logo {
-    position: absolute;
-  
-    left: 50%;
-    bottom: 35px;
-  
-    transform: translateX(-50%);
-  
-    width: 285px;
-  }
-  
-  /* ========================================
+
+.snack-hero {
+  position: relative;
+  width: 100%;
+}
+
+.snack-hero-image {
+  width: 100%;
+  height: 305px;
+  object-fit: cover;
+}
+
+.snack-logo {
+  position: absolute;
+
+  left: 50%;
+  bottom: 35px;
+
+  transform: translateX(-50%);
+
+  width: 285px;
+}
+
+/* ========================================
      SLOGAN
   ======================================== */
-  
-  .snack-slogan {
-    margin: 1.5rem 1rem;
-  
-    text-align: center;
-  
-    color: white;
-  
-    font-size: 1.1rem;
-  
-    font-style: italic;
-  
-    font-weight: 600;
-  }
-  
-  /* ========================================
+
+.snack-slogan {
+  margin: 1.5rem 1rem;
+
+  text-align: center;
+
+  color: white;
+
+  font-size: 1.1rem;
+
+  font-style: italic;
+
+  font-weight: 600;
+}
+
+/* ========================================
      BUTTONS
   ======================================== */
-  
-  .snack-buttons {
-    display: flex;
-  
-    justify-content: center;
-  
-    gap: 1rem;
-  
-    margin-bottom: 2.5rem;
-  }
-  
-  .snack-button {
-    width: 140px;
-  
-    padding: .9rem;
-  
-    border-radius: 999px;
-  
-    text-decoration: none;
-  
-    text-align: center;
-  
-    font-weight: 700;
-  
-    transition: var(--transition);
-  }
-  
-  .snack-button:hover {
-    transform: translateY(-2px);
-  }
-  
-  .snack-button.outline {
-    border: 2px solid white;
-  
-    color: white;
-  
-    background: transparent;
-  }
-  
-  .snack-button.filled {
-    border: none;
-  
-    background: white;
-  
-    color: var(--snack-primary);
-  
-    cursor: pointer;
-  }
-  
-  /* ========================================
+
+.snack-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 1rem;
+
+  margin-bottom: 2.5rem;
+}
+
+.snack-button {
+  width: 140px;
+
+  padding: 0.9rem;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  text-align: center;
+
+  font-weight: 700;
+
+  transition: var(--transition);
+}
+
+.snack-button:hover {
+  transform: translateY(-2px);
+}
+
+.snack-button.outline {
+  border: 2px solid white;
+
+  color: white;
+
+  background: transparent;
+}
+
+.snack-button.filled {
+  border: none;
+
+  background: white;
+
+  color: var(--snack-primary);
+
+  cursor: pointer;
+}
+
+/* ========================================
      TITELS
   ======================================== */
-  
-  .promo-section,
-  .popular-section {
-    padding: 0 1rem;
-  }
-  
-  .promo-section h2,
-  .popular-section h2 {
-    color: white;
-  
-    margin-bottom: 1rem;
-  
-    font-size: 2rem;
-  }
-  
-  /* ========================================
+
+.promo-section,
+.popular-section {
+  padding: 0 1rem;
+}
+
+.promo-section h2,
+.popular-section h2 {
+  color: white;
+
+  margin-bottom: 1rem;
+
+  font-size: 2rem;
+}
+
+/* ========================================
      PROMO
   ======================================== */
-  
-  .promo-image {
-    width: 100%;
-  
-    border-radius: 22px;
-  
-    display: block;
-  
-    box-shadow: var(--shadow-card);
-  }
-  
-  /* ========================================
+
+.promo-image {
+  width: 100%;
+
+  border-radius: 22px;
+
+  display: block;
+
+  box-shadow: var(--shadow-card);
+}
+
+/* ========================================
      POPULAIR
   ======================================== */
-  
-  .popular-section {
-    margin-top: 2.5rem;
-  }
-  
-  .popular-grid {
-    display: grid;
-  
-    grid-template-columns: repeat(2, 1fr);
-  
-    gap: 1rem;
-  }
-  
-  /* ========================================
+
+.popular-section {
+  margin-top: 2.5rem;
+}
+
+.popular-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1rem;
+}
+
+/* ========================================
      FOOTER
   ======================================== */
-  
-  .footer-info {
-    margin-top: 3rem;
-  
-    color: white;
-  }
-  
-  /* ========================================
+
+.footer-info {
+  margin-top: 3rem;
+
+  color: white;
+}
+
+/* ========================================
      TABLET
   ======================================== */
-  
-  @media (min-width: 768px) {
-  
-    .snackhoek-container {
-  
-      max-width: 760px;
-  
-    }
-  
-    .snack-hero-image {
-  
-      height: 420px;
-  
-    }
-  
-    .snack-logo {
-  
-      width: 340px;
-  
-    }
-  
-    .popular-grid {
-  
-      grid-template-columns: repeat(4, 1fr);
-  
-    }
-  
+
+@media (min-width: 768px) {
+  .snackhoek-container {
+    max-width: 760px;
   }
+
+  .snack-hero-image {
+    height: 420px;
+  }
+
+  .snack-logo {
+    width: 340px;
+  }
+
+  .popular-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

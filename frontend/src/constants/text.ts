@@ -3,9 +3,7 @@
 ======================================== */
 
 export const TEXT = {
-
   snackhoek: {
-
     slogan: "Snel en lekker genieten tijdens je verblijf",
 
     menuButton: "Menu",
@@ -21,7 +19,5 @@ export const TEXT = {
     menuSubtitle: "Vers bereid • Snel geserveerd",
 
     cartButton: "Bekijk bestelling",
-
   },
-
 };
