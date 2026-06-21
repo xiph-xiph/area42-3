@@ -12,7 +12,7 @@ import heroImage from "../assets/images/snackhoek_hero.png";
 import logoImage from "../assets/images/snackhoek_logo.png";
 import promoImage from "../assets/images/snackhoek_promo.png";
 import instagramLogo from "../assets/images/instagram-logo.png";
-import type { MenuItem } from "@/types/MenuDto";
+import type { MenuItem } from "../types/MenuDto";
 
 function SnackhoekPage() {
   const [snackProducts, setSnackProducts] = useState<MenuItem[]>([]);
