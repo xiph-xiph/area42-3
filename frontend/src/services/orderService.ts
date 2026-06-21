@@ -2,7 +2,6 @@ import axios from "axios";
 
 // import type SuccessMessageDto from "../types/SuccessMessageDto";
 import type CartDto from "../types/CartDto";
-import type SuccessMessageDto from "@/types/SuccessMessageDto";
 
 const API_URL = "/api/order";
 
@@ -18,8 +17,8 @@ export const getCart = async (): Promise<CartDto> => {
 export const addToCart = async (
   menuItemId: number,
   quantity: number,
-): Promise<SuccessMessageDto> => {
-  const response = await axios.post<SuccessMessageDto>(
+): Promise<CartDto> => {
+  const response = await axios.post<CartDto>(
     `${API_URL}/cart/add`,
     { menuItemId, quantity },
     {
@@ -34,8 +33,8 @@ export const addToCart = async (
 export const removeFromCart = async (
   orderItemId: number,
   quantity: number,
-): Promise<SuccessMessageDto> => {
-  const response = await axios.post<SuccessMessageDto>(
+): Promise<CartDto> => {
+  const response = await axios.post<CartDto>(
     `${API_URL}/cart/remove`,
     { orderItemId, quantity },
     {
