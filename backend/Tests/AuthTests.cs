@@ -164,4 +164,20 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.False(string.IsNullOrWhiteSpace(body.Token));
         Assert.False(string.IsNullOrWhiteSpace(body.ValidUntil));
     }
+
+    [Fact]
+    public async Task Login_Returns_BadRequest_When_MissingFields()
+    {
+        var request = new
+        {
+            Email = CreateEmail("login-missing-fields")
+        };
+
+        var response = await client.PostAsJsonAsync(
+            $"{baseUrl}/login",
+            request
+        );
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
 }
