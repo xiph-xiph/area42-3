@@ -9,12 +9,18 @@ namespace Tests;
 public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient client;
+    private readonly string runnerId = Guid.NewGuid().ToString();
     private readonly string baseUrl = "http://localhost:5000/api/auth";
 
     public AuthTests(WebApplicationFactory<Program> factory)
     {
         Environment.SetEnvironmentVariable("JwtSecretKey", "test-secret-key-has-to-be-32-characters-long-or-it-will-not-work");
         client = factory.CreateClient();
+    }
+
+    private string CreateEmail(string prefix)
+    {
+        return $"{prefix}.{runnerId}@example.com";
     }
 
     [Fact]
@@ -24,7 +30,7 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
         {
             Name = Helpers.GenerateRandomName(),
             Phone = Helpers.GenerateRandomPhoneNumber(),
-            Email = Helpers.GenerateRandomEmail(),
+            Email = CreateEmail("register-ok"),
             Password = Helpers.GenerateRandomPassword()
         };
 
@@ -37,5 +43,22 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(@"{""success"":true,""message"":""Registratie geslaagd.""}", body);
+    }
+
+    [Fact]
+    public async Task Register_Returns_BadRequest_When_MissingFields()
+    {
+        var request = new
+        {
+            Email = CreateEmail("register-missing-fields"),
+            Password = Helpers.GenerateRandomPassword()
+        };
+
+        var response = await client.PostAsJsonAsync(
+            $"{baseUrl}/register",
+            request
+        );
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 }
