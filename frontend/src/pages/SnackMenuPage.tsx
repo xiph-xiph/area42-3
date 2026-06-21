@@ -54,13 +54,21 @@ function SnackMenuPage() {
   ======================================== */
 
   const handleAddToCart = async (product: MenuItem) => {
-    await addToCart(product.id, 1);
-    setRefreshCart((prev) => !prev);
+    const response = await addToCart(product.id, 1);
+    if (response.success) {
+      setRefreshCart((prev) => !prev);
+    } else {
+      alert("Fout bij toevoegen aan winkelmand: " + response.message);
+    }
   };
 
   const handleRemoveFromCart = async (productId: number) => {
-    await removeFromCart(productId, 1);
-    setRefreshCart((prev) => !prev);
+    const response = await removeFromCart(productId, 1);
+    if (response.success) {
+      setRefreshCart((prev) => !prev);
+    } else {
+      alert("Fout bij verwijderen uit winkelmand: " + response.message);
+    }
   };
 
   /* ========================================
