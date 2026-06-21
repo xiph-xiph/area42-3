@@ -91,4 +91,34 @@ public class ReservationRepo(NpgsqlDataSource dataSource) : IReservationRepo
         command.Parameters.AddWithValue("@status", reservation.Status.ToString().ToLowerInvariant());
         await command.ExecuteNonQueryAsync();
     }
+    public async Task<List<ReservationEmployee>> GetAllWithUserInfo()
+    {
+        var result = new List<ReservationEmployee>();
+        using var connection = await dataSource.OpenConnectionAsync();
+        string query = @"
+        SELECT r.id, r.user_id, r.table_id, r.start_date, r.amount, 
+               r.restaurant::text, r.status::text,
+               u.name, u.email, u.phone
+        FROM reservations r
+        JOIN users u ON r.user_id = u.id";
+        using var command = new NpgsqlCommand(query, connection);
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            result.Add(new ReservationEmployee
+            {
+                Id = reader.GetInt32(0),
+                UserId = reader.GetInt32(1),
+                TableId = reader.GetInt32(2),
+                StartDate = reader.GetDateTime(3),
+                Amount = reader.GetInt32(4),
+                Restaurant = Enum.Parse<Restaurant>(reader.GetString(5), true),
+                Status = Enum.Parse<ReservationStatus>(reader.GetString(6), true),
+                Name = reader.GetString(7),
+                Email = reader.GetString(8),
+                Phone = reader.GetString(9)
+            });
+        }
+        return result;
+    }
 }

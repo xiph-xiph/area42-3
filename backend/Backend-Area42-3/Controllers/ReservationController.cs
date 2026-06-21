@@ -15,17 +15,12 @@ public class ReservationController(ReservationService reservationService) : Cont
 
     [HttpGet]
     [Authorize]
-    public async Task<ActionResult<List<ReservationDto>>> GetReservations()
+    public async Task<ActionResult> GetReservations()
     {
         if (User.IsInRole("Employee"))
         {
-            var reservations = await _reservationService.GetAll();
-            var result = reservations.Select(r => new ReservationDto
-            {
-                Reservation = r,
-                TableName = $"Tafel {r.TableId}"
-            }).ToList();
-            return Ok(result);
+            var reservations = await _reservationService.GetAllWithUserInfo();
+            return Ok(reservations);
         }
         else
         {

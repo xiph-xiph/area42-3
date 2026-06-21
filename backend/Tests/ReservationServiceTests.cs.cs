@@ -30,22 +30,22 @@ public class ReservationServiceTests
     [Fact]
     public async Task CheckAvailability_TafelVrij_ReturnsTrue()
     {
-        // Arrange
+        
         _reservationRepoMock
             .Setup(r => r.GetAll())
             .ReturnsAsync(new List<Reservation>());
 
-        // Act
+        
         var result = await _service.CheckAvailability(1, new DateTime(2025, 6, 15, 19, 0, 0));
 
-        // Assert
+        
         Assert.True(result);
     }
 
     [Fact]
     public async Task CheckAvailability_TafelBezet_ReturnsFalse()
     {
-        // Arrange
+        
         var date = new DateTime(2025, 6, 15, 19, 0, 0);
 
         _reservationRepoMock
@@ -60,17 +60,17 @@ public class ReservationServiceTests
                 }
             });
 
-        // Act
+        
         var result = await _service.CheckAvailability(1, date);
 
-        // Assert
+        
         Assert.False(result);
     }
 
     [Fact]
     public async Task Create_UserBestaatNiet_ReturnsNull()
     {
-        // Arrange
+        
         _userRepoMock
             .Setup(r => r.GetUserById(99))
             .ReturnsAsync((User?)null);
@@ -82,17 +82,17 @@ public class ReservationServiceTests
             Amount = 4
         };
 
-        // Act
+        
         var result = await _service.Create(dto);
 
-        // Assert
+        
         Assert.Null(result);
     }
 
     [Fact]
     public async Task Create_GeenTafelBeschikbaar_ReturnsNull()
     {
-        // Arrange
+        
         var date = new DateTime(2025, 6, 15, 19, 0, 0);
 
         _userRepoMock
@@ -103,7 +103,7 @@ public class ReservationServiceTests
             .Setup(r => r.GetAll())
             .ReturnsAsync(new List<Table>
             {
-                new Table { Id = 1, MaxGuests = 2 } // te klein voor 4 gasten
+                new Table { Id = 1, MaxGuests = 2 } 
             });
 
         var dto = new CreateReservationDto
@@ -113,17 +113,17 @@ public class ReservationServiceTests
             Amount = 4
         };
 
-        // Act
+        
         var result = await _service.Create(dto);
 
-        // Assert
+        
         Assert.Null(result);
     }
 
     [Fact]
     public async Task Create_TafelBezet_ReturnsNull()
     {
-        // Arrange
+        
         var date = new DateTime(2025, 6, 15, 19, 0, 0);
 
         _userRepoMock
@@ -151,17 +151,17 @@ public class ReservationServiceTests
             Amount = 4
         };
 
-        // Act
+        
         var result = await _service.Create(dto);
 
-        // Assert
+        
         Assert.Null(result);
     }
 
     [Fact]
     public async Task Create_AllesGoed_ReturnsReservation()
     {
-        // Arrange
+        
         var date = new DateTime(2025, 6, 15, 19, 0, 0);
 
         _userRepoMock
@@ -190,10 +190,10 @@ public class ReservationServiceTests
             Amount = 4
         };
 
-        // Act
+        
         var result = await _service.Create(dto);
 
-        // Assert
+        
         Assert.NotNull(result);
         Assert.Equal(1, result.UserId);
         Assert.Equal(date, result.StartDate);
@@ -203,7 +203,7 @@ public class ReservationServiceTests
     [Fact]
     public async Task GetAvailableSlots_GeenReserveringen_ReturnsAllSlots()
     {
-        // Arrange
+        
         var date = new DateTime(2025, 6, 15);
 
         _tableRepoMock
@@ -217,17 +217,17 @@ public class ReservationServiceTests
             .Setup(r => r.GetAll())
             .ReturnsAsync(new List<Reservation>());
 
-        // Act
+        
         var result = await _service.GetAvailableSlots(date);
 
-        // Assert
+        
         Assert.Equal(5, result.Count);
     }
 
     [Fact]
     public async Task GetAvailableSlots_AllesBezet_ReturnsEmptyList()
     {
-        // Arrange
+        
         var date = new DateTime(2025, 6, 15);
 
         _tableRepoMock
@@ -248,10 +248,10 @@ public class ReservationServiceTests
                 new Reservation { TableId = 1, StartDate = date.AddHours(21), Status = ReservationStatus.Scheduled }
             });
 
-        // Act
+        
         var result = await _service.GetAvailableSlots(date);
 
-        // Assert
+        
         Assert.Empty(result);
     }
 }

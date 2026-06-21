@@ -100,4 +100,8 @@ public class ReservationService(
 
         return availableSlots.Distinct().ToList();
     }
+    public async Task<List<ReservationEmployee>> GetAllWithUserInfo()
+    {
+        return await _reservationRepo.GetAllWithUserInfo();
+    }
 }
