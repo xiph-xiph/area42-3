@@ -3,14 +3,14 @@
 ======================================== */
 
 import "./ShoppingCart.css";
-import type { CartItem } from "../types/CartItem";
+import type { OrderItem } from "../types/CartDto";
 
 /* ========================================
    PROPS
 ======================================== */
 
 type ShoppingCartProps = {
-  cart: CartItem[];
+  cart: OrderItem[];
   onAdd: (id: number) => void;
   onRemove: (id: number) => void;
   onCheckout: () => void;

@@ -27,9 +27,11 @@ public class OrderRepository(NpgsqlDataSource dataSource) : IOrderRepository
                          JSON_AGG(
                              JSON_BUILD_OBJECT(
                                  'Id', mi.id,
-                                 'Name', mi.name,
+                                 'Title', mi.title,
                                  'Price', mi.price,
-                                 'Description', mi.description,
+                                 'ImageUrl', mi.image_url,
+                                 'Category', mi.category,
+                                 'IsPopular', mi.is_popular,
                                  'Quantity', oi.quantity
                              )
                          ) FILTER (WHERE mi.id IS NOT NULL),
@@ -87,9 +89,11 @@ public class OrderRepository(NpgsqlDataSource dataSource) : IOrderRepository
                          JSON_AGG(
                              JSON_BUILD_OBJECT(
                                  'Id', mi.id,
-                                 'Name', mi.name,
+                                 'Title', mi.title,
                                  'Price', mi.price,
-                                 'Description', mi.description,
+                                 'ImageUrl', mi.image_url,
+                                 'Category', mi.category,
+                                 'IsPopular', mi.is_popular,
                                  'Quantity', oi.quantity
                              )
                          ) FILTER (WHERE mi.id IS NOT NULL),
@@ -147,9 +151,11 @@ public class OrderRepository(NpgsqlDataSource dataSource) : IOrderRepository
                          JSON_AGG(
                              JSON_BUILD_OBJECT(
                                  'Id', mi.id,
-                                 'Name', mi.name,
+                                 'Title', mi.title,
                                  'Price', mi.price,
-                                 'Description', mi.description,
+                                 'ImageUrl', mi.image_url,
+                                 'Category', mi.category,
+                                 'IsPopular', mi.is_popular,
                                  'Quantity', oi.quantity
                              )
                          ) FILTER (WHERE mi.id IS NOT NULL),
@@ -208,9 +214,11 @@ public class OrderRepository(NpgsqlDataSource dataSource) : IOrderRepository
                          JSON_AGG(
                              JSON_BUILD_OBJECT(
                                  'Id', mi.id,
-                                 'Name', mi.name,
+                                 'Title', mi.title,
                                  'Price', mi.price,
-                                 'Description', mi.description,
+                                 'ImageUrl', mi.image_url,
+                                 'Category', mi.category,
+                                 'IsPopular', mi.is_popular,
                                  'Quantity', oi.quantity
                              )
                          ) FILTER (WHERE mi.id IS NOT NULL),
