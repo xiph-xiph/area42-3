@@ -97,4 +97,23 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
 
         Assert.Equal(HttpStatusCode.BadRequest, duplicateResponse.StatusCode);
     }
+
+    [Fact]
+    public async Task Register_Returns_BadRequest_When_InvalidEmailFormat()
+    {
+        var request = new
+        {
+            Name = Helpers.GenerateRandomName(),
+            Phone = Helpers.GenerateRandomPhoneNumber(),
+            Email = "not-an-email-address",
+            Password = Helpers.GenerateRandomPassword()
+        };
+
+        var response = await client.PostAsJsonAsync(
+            $"{baseUrl}/register",
+            request
+        );
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
 }
