@@ -5,15 +5,24 @@ import { Link } from "react-router-dom";
 import FooterInfo from "../components/FooterInfo";
 import SnackProductCard from "../components/SnackProductCard";
 
-import { snackProducts } from "../data/snackProducts";
+import { useState, useEffect } from "react";
 
+import { getMenu } from "../services/menuService";
 import heroImage from "../assets/images/snackhoek_hero.png";
 import logoImage from "../assets/images/snackhoek_logo.png";
 import promoImage from "../assets/images/snackhoek_promo.png";
 import instagramLogo from "../assets/images/instagram-logo.png";
+import type { MenuItem } from "@/types/MenuDto";
 
 function SnackhoekPage() {
-  const popularProducts = snackProducts.filter((product) => product.popular);
+  const [snackProducts, setSnackProducts] = useState<MenuItem[]>([]);
+  useEffect(() => {
+    getMenu().then((data) => {
+      setSnackProducts(data.menu);
+    });
+  }, []);
+
+  const popularProducts = snackProducts.filter((product) => product.isPopular);
 
   return (
     <main className="snackhoek-page">
@@ -59,7 +68,7 @@ function SnackhoekPage() {
             {popularProducts.map((product) => (
               <SnackProductCard
                 key={product.id}
-                image={product.image}
+                image={product.imageUrl}
                 title={product.title}
                 price={product.price}
                 quantity={0}

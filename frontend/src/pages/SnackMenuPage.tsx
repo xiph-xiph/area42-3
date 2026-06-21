@@ -4,13 +4,15 @@
 
 import "./SnackMenuPage.css";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { getMenu } from "../services/menuService";
+
 import SnackProductCard from "../components/SnackProductCard";
-import { snackProducts } from "../data/snackProducts";
 import type { CartItem } from "../types/CartItem";
 import ShoppingCart from "../components/ShoppingCart";
+import type { MenuItem } from "../types/MenuDto";
 
 /* ========================================
    COMPONENT
@@ -21,8 +23,15 @@ function SnackMenuPage() {
      STATE
   ======================================== */
 
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [cart, setCart] = useState<CartItem[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getMenu().then((data) => {
+      setMenuItems(data.menu);
+    });
+  }, []);
 
   /* ========================================
      CONSTANTS
@@ -36,7 +45,7 @@ function SnackMenuPage() {
      WINKELWAGEN
   ======================================== */
 
-  const addToCart = (product: (typeof snackProducts)[number]) => {
+  const addToCart = (product: MenuItem) => {
     setCart((current) => {
       const existingItem = current.find((item) => item.id === product.id);
 
@@ -143,12 +152,12 @@ function SnackMenuPage() {
             <h2>{category}</h2>
 
             <div className="menu-grid">
-              {snackProducts
+              {menuItems
                 .filter((product) => product.category === category)
                 .map((product) => (
                   <SnackProductCard
                     key={product.id}
-                    image={product.image}
+                    image={product.imageUrl}
                     title={product.title}
                     price={product.price}
                     quantity={getQuantity(product.id)}
@@ -167,7 +176,7 @@ function SnackMenuPage() {
         <ShoppingCart
           cart={cart}
           onAdd={(id) => {
-            const product = snackProducts.find((p) => p.id === id);
+            const product = menuItems.find((p) => p.id === id);
 
             if (product) {
               addToCart(product);
