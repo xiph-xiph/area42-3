@@ -6,15 +6,9 @@ type BackButtonProps = {
   label: string;
 };
 
-function BackButton({
-  to,
-  label,
-}: BackButtonProps) {
+function BackButton({ to, label }: BackButtonProps) {
   return (
-    <Link
-      to={to}
-      className="back-button"
-    >
+    <Link to={to} className="back-button">
       <span className="back-button-icon">←</span>
 
       <span>{label}</span>
@@ -22,4 +16,4 @@ function BackButton({
   );
 }
 
-export default BackButton;  
+export default BackButton;

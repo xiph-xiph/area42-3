@@ -24,7 +24,7 @@ function ReservationForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = event.target;
 
@@ -67,18 +67,11 @@ function ReservationForm() {
   };
 
   if (isSubmitted) {
-    return (
-      <ReservationSuccess
-        onNewReservation={handleNewReservation}
-      />
-    );
+    return <ReservationSuccess onNewReservation={handleNewReservation} />;
   }
 
   return (
-    <form
-      className="reservation-form"
-      onSubmit={handleSubmit}
-    >
+    <form className="reservation-form" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="name">Naam</label>
 
@@ -91,11 +84,7 @@ function ReservationForm() {
           placeholder="Vul uw naam in"
         />
 
-        {errors.name && (
-          <span className="form-error">
-            {errors.name}
-          </span>
-        )}
+        {errors.name && <span className="form-error">{errors.name}</span>}
       </div>
 
       <div className="form-group">
@@ -110,11 +99,7 @@ function ReservationForm() {
           placeholder="voorbeeld@email.nl"
         />
 
-        {errors.email && (
-          <span className="form-error">
-            {errors.email}
-          </span>
-        )}
+        {errors.email && <span className="form-error">{errors.email}</span>}
       </div>
 
       <div className="form-group">
@@ -129,11 +114,7 @@ function ReservationForm() {
           placeholder="06 12345678"
         />
 
-        {errors.phone && (
-          <span className="form-error">
-            {errors.phone}
-          </span>
-        )}
+        {errors.phone && <span className="form-error">{errors.phone}</span>}
       </div>
 
       <div className="form-group">
@@ -148,11 +129,7 @@ function ReservationForm() {
           onChange={handleChange}
         />
 
-        {errors.guests && (
-          <span className="form-error">
-            {errors.guests}
-          </span>
-        )}
+        {errors.guests && <span className="form-error">{errors.guests}</span>}
       </div>
 
       <div className="form-group">
@@ -166,11 +143,7 @@ function ReservationForm() {
           onChange={handleChange}
         />
 
-        {errors.date && (
-          <span className="form-error">
-            {errors.date}
-          </span>
-        )}
+        {errors.date && <span className="form-error">{errors.date}</span>}
       </div>
 
       <div className="form-group">
@@ -184,11 +157,7 @@ function ReservationForm() {
           onChange={handleChange}
         />
 
-        {errors.time && (
-          <span className="form-error">
-            {errors.time}
-          </span>
-        )}
+        {errors.time && <span className="form-error">{errors.time}</span>}
       </div>
 
       <div className="form-group">
@@ -204,10 +173,7 @@ function ReservationForm() {
         />
       </div>
 
-      <button
-        type="submit"
-        className="reservation-submit"
-      >
+      <button type="submit" className="reservation-submit">
         Reservering aanvragen
       </button>
     </form>

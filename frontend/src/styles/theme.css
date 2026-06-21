@@ -1,6 +1,6 @@
 :root {
   --primary-color: #014604;
-  --restaurant-color: #3C5539;
+  --restaurant-color: #3c5539;
   --snackhoek-color: #f7c003;
 
   --font-primary: "Poppins", sans-serif;
@@ -12,40 +12,30 @@
    FONTS
 ========================== */
 
---font-primary: "Poppins", sans-serif;
---font-restaurant: "Cormorant Garamond", serif;
---font-snackhoek: "Montserrat", sans-serif;
---font-park: "Poppins", sans-serif;
+  --font-primary: "Poppins", sans-serif;
+  --font-restaurant: "Cormorant Garamond", serif;
+  --font-snackhoek: "Montserrat", sans-serif;
+  --font-park: "Poppins", sans-serif;
 
-
-/* ==========================
+  /* ==========================
    SNACKHOEK
 ========================== */
 
---snack-primary: #F28C28;
---snack-secondary: #F6B25D;
---snack-light: #FFF4E8;
---snack-card: #FFE6C7;
---snack-text: #2F2F2F;
+  --snack-primary: #f28c28;
+  --snack-secondary: #f6b25d;
+  --snack-light: #fff4e8;
+  --snack-card: #ffe6c7;
+  --snack-text: #2f2f2f;
 
-
-/* ==========================
+  /* ==========================
    ALGEMEEN
 ========================== */
 
---radius-large: 24px;
---radius-medium: 18px;
---radius-small: 12px;
+  --radius-large: 24px;
+  --radius-medium: 18px;
+  --radius-small: 12px;
 
---shadow-card: 0 6px 18px rgba(0,0,0,.15);
+  --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.15);
 
---transition: .25s ease;
-
-
-
-
-
-
-
-
+  --transition: 0.25s ease;
 }

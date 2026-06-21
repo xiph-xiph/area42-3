@@ -35,11 +35,7 @@ function SnackProductCard({
           PRODUCT AFBEELDING
       ======================================== */}
 
-      <img
-        src={image}
-        alt={title}
-        className="snack-product-image"
-      />
+      <img src={image} alt={title} className="snack-product-image" />
 
       {/* ========================================
           PRODUCT TITEL
@@ -78,9 +74,7 @@ function SnackProductCard({
               −
             </button>
 
-            <span className="snack-product-quantity">
-              {quantity}
-            </span>
+            <span className="snack-product-quantity">{quantity}</span>
 
             <button
               className="snack-product-button"

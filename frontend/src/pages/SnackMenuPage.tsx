@@ -28,13 +28,7 @@ function SnackMenuPage() {
      CONSTANTS
   ======================================== */
 
-  const categories = [
-    "Friet",
-    "Snacks",
-    "Burgers",
-    "Dranken",
-    "Desserts",
-  ];
+  const categories = ["Friet", "Snacks", "Burgers", "Dranken", "Desserts"];
 
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
@@ -42,11 +36,9 @@ function SnackMenuPage() {
      WINKELWAGEN
   ======================================== */
 
-  const addToCart = (product: typeof snackProducts[number]) => {
+  const addToCart = (product: (typeof snackProducts)[number]) => {
     setCart((current) => {
-      const existingItem = current.find(
-        (item) => item.id === product.id
-      );
+      const existingItem = current.find((item) => item.id === product.id);
 
       if (existingItem) {
         return current.map((item) =>
@@ -55,7 +47,7 @@ function SnackMenuPage() {
                 ...item,
                 quantity: item.quantity + 1,
               }
-            : item
+            : item,
         );
       }
 
@@ -80,9 +72,9 @@ function SnackMenuPage() {
                 ...item,
                 quantity: item.quantity - 1,
               }
-            : item
+            : item,
         )
-        .filter((item) => item.quantity > 0)
+        .filter((item) => item.quantity > 0),
     );
   };
 
@@ -91,12 +83,9 @@ function SnackMenuPage() {
   ======================================== */
 
   const getQuantity = (productId: number) => {
-    return (
-      cart.find((item) => item.id === productId)?.quantity ?? 0
-    );
+    return cart.find((item) => item.id === productId)?.quantity ?? 0;
   };
 
- 
   /* ========================================
      SCROLL
   ======================================== */
@@ -115,16 +104,13 @@ function SnackMenuPage() {
   return (
     <main className="snack-menu-page">
       <div className="snack-menu-container">
-
         {/* ========================================
             HEADER
         ======================================== */}
 
         <h1>Menu</h1>
 
-        <p className="menu-subtitle">
-          Vers bereid • Snel geserveerd
-        </p>
+        <p className="menu-subtitle">Vers bereid • Snel geserveerd</p>
 
         {/* ========================================
             CATEGORIEËN
@@ -158,9 +144,7 @@ function SnackMenuPage() {
 
             <div className="menu-grid">
               {snackProducts
-                .filter(
-                  (product) => product.category === category
-                )
+                .filter((product) => product.category === category)
                 .map((product) => (
                   <SnackProductCard
                     key={product.id}
@@ -169,9 +153,7 @@ function SnackMenuPage() {
                     price={product.price}
                     quantity={getQuantity(product.id)}
                     onAdd={() => addToCart(product)}
-                    onRemove={() =>
-                      removeFromCart(product.id)
-                    }
+                    onRemove={() => removeFromCart(product.id)}
                   />
                 ))}
             </div>
@@ -182,22 +164,22 @@ function SnackMenuPage() {
             WINKELWAGEN
         ======================================== */}
 
-<ShoppingCart
-  cart={cart}
-  onAdd={(id) => {
-    const product = snackProducts.find((p) => p.id === id);
+        <ShoppingCart
+          cart={cart}
+          onAdd={(id) => {
+            const product = snackProducts.find((p) => p.id === id);
 
-    if (product) {
-      addToCart(product);
-    }
-  }}
-  onRemove={removeFromCart}
-  onCheckout={() =>
-    navigate("/snackhoek/checkout", {
-      state: { cart },
-    })
-  }
-/>
+            if (product) {
+              addToCart(product);
+            }
+          }}
+          onRemove={removeFromCart}
+          onCheckout={() =>
+            navigate("/snackhoek/checkout", {
+              state: { cart },
+            })
+          }
+        />
       </div>
     </main>
   );

@@ -1,0 +1,63 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Backend_Area42_3.Services;
+using Backend_Area42_3.DTO.Input;
+using Backend_Area42_3.DTO.Output;
+
+namespace Backend_Area42_3.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class OrderController(OrderService orderService) : ControllerBase
+{
+    private readonly OrderService orderService = orderService;
+
+    [HttpGet("cart")]
+    [Authorize]
+    public async Task<CartDto> GetCart()
+    {
+        int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        return await orderService.GetCart(userId);
+    }
+
+    [HttpPost("cart/add")]
+    [Authorize]
+    public async Task<SuccessMessageDto> AddItemToCart(AddItemDto addItemDto)
+    {
+        int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        return await orderService.AddItemToCart(addItemDto, userId);
+    }
+
+    [HttpPost("cart/remove")]
+    [Authorize]
+    public async Task<SuccessMessageDto> RemoveItemFromCart(RemoveItemDto removeItemDto)
+    {
+        int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        return await orderService.RemoveItemFromCart(removeItemDto, userId);
+    }
+
+    [HttpPost("cart/checkout")]
+    [Authorize]
+    public async Task<SuccessMessageDto> CheckoutCart(CheckoutDto checkoutDto)
+    {
+        int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        return await orderService.CheckoutCart(checkoutDto, userId);
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<OrderListDto> GetOrders()
+    {
+
+        if (User.IsInRole("Admin"))
+        {
+            return await orderService.GetAllOrders();
+        }
+        else
+        {
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+            return await orderService.GetUserOrders(userId);
+        }
+    }
+}
