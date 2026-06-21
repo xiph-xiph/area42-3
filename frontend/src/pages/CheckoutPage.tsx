@@ -2,8 +2,6 @@
    IMPORTS
 ======================================== */
 
-import timeStringToTodayDate from "../utils/timeStringToTodayDate";
-import { checkoutCart } from "../services/orderService";
 import "./CheckoutPage.css";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -17,10 +15,8 @@ function CheckoutPage() {
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  type PickupTimes = "zsm" | "15m" | "30m" | "custom";
-  const [pickupTime, setPickupTime] = useState<PickupTimes>("zsm");
+  const [pickupTime, setPickupTime] = useState("Zo snel mogelijk");
   const [remarks, setRemarks] = useState("");
-  const [customTime, setCustomTime] = useState<string>("");
 
   const { state } = useLocation();
 
@@ -32,32 +28,26 @@ function CheckoutPage() {
     0,
   );
 
-  const handleOrder = async () => {
-    let translatedPickupTime;
-    switch (pickupTime) {
-      case "zsm":
-        translatedPickupTime = new Date();
-        break;
-      case "15m":
-        translatedPickupTime = new Date(Date.now() + 15 * 60 * 1000);
-        break;
-      case "30m":
-        translatedPickupTime = new Date(Date.now() + 30 * 60 * 1000);
-        break;
-      case "custom":
-        translatedPickupTime = new Date(timeStringToTodayDate(customTime) ?? 0);
-    }
-    const response = await checkoutCart(
-      name,
-      phone,
-      translatedPickupTime,
+  const handleOrder = () => {
+    const order = {
+      customer: {
+        name,
+        phone,
+      },
+
+      pickupTime,
+
       remarks,
-    );
-    if (response.success) {
-      navigate("/snackhoek/bevestiging");
-    } else {
-      alert("Fout bij plaatsen van bestelling: " + response.message);
-    }
+
+      items: cart.map((item: { id: number; quantity: number }) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      })),
+    };
+
+    console.log("Bestelling:", order);
+
+    navigate("/snackhoek/bevestiging");
   };
 
   return (
@@ -110,9 +100,9 @@ function CheckoutPage() {
             <input
               type="radio"
               name="pickup"
-              value="zsm"
-              checked={pickupTime === "zsm"}
-              onChange={(e) => setPickupTime(e.target.value as PickupTimes)}
+              value="Zo snel mogelijk"
+              checked={pickupTime === "Zo snel mogelijk"}
+              onChange={(e) => setPickupTime(e.target.value)}
             />
             Zo snel mogelijk
           </label>
@@ -121,9 +111,9 @@ function CheckoutPage() {
             <input
               type="radio"
               name="pickup"
-              value="15m"
-              checked={pickupTime === "15m"}
-              onChange={(e) => setPickupTime(e.target.value as PickupTimes)}
+              value="Zo snel mogelijk"
+              checked={pickupTime === "Zo snel mogelijk"}
+              onChange={(e) => setPickupTime(e.target.value)}
             />
             Over 15 minuten
           </label>
@@ -132,9 +122,9 @@ function CheckoutPage() {
             <input
               type="radio"
               name="pickup"
-              value="30m"
-              checked={pickupTime === "30m"}
-              onChange={(e) => setPickupTime(e.target.value as PickupTimes)}
+              value="Zo snel mogelijk"
+              checked={pickupTime === "Zo snel mogelijk"}
+              onChange={(e) => setPickupTime(e.target.value)}
             />
             Over 30 minuten
           </label>
@@ -143,19 +133,14 @@ function CheckoutPage() {
             <input
               type="radio"
               name="pickup"
-              value="custom"
-              checked={pickupTime === "custom"}
-              onChange={(e) => setPickupTime(e.target.value as PickupTimes)}
+              value="Zo snel mogelijk"
+              checked={pickupTime === "Zo snel mogelijk"}
+              onChange={(e) => setPickupTime(e.target.value)}
             />
             Eigen tijd
           </label>
 
-          <input
-            type="time"
-            className="time-input"
-            value={customTime}
-            onChange={(e) => setCustomTime(e.target.value)}
-          />
+          <input type="time" className="time-input" />
         </section>
 
         {/* ========================================
