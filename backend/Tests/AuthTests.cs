@@ -116,4 +116,23 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
+
+    [Fact]
+    public async Task Register_Returns_BadRequest_When_WeakPassword()
+    {
+        var request = new
+        {
+            Name = Helpers.GenerateRandomName(),
+            Phone = Helpers.GenerateRandomPhoneNumber(),
+            Email = CreateEmail("register-weak-password"),
+            Password = "123"
+        };
+
+        var response = await client.PostAsJsonAsync(
+            $"{baseUrl}/register",
+            request
+        );
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
 }
