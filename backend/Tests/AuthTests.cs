@@ -135,4 +135,33 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
+
+    [Fact]
+    public async Task Login_Returns_Ok_With_Valid_Credentials()
+    {
+        string email = CreateEmail("login-ok");
+        string password = Helpers.GenerateRandomPassword();
+
+        await RegisterUserAsync(email, password);
+
+        var request = new
+        {
+            Email = email,
+            Password = password
+        };
+
+        var response = await client.PostAsJsonAsync(
+            $"{baseUrl}/login",
+            request
+        );
+
+        var body = await response.Content.ReadFromJsonAsync<TokenDto>();
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.NotNull(body);
+        Assert.True(body!.Success);
+        Assert.Equal("Inloggen geslaagd.", body.Message);
+        Assert.False(string.IsNullOrWhiteSpace(body.Token));
+        Assert.False(string.IsNullOrWhiteSpace(body.ValidUntil));
+    }
 }
