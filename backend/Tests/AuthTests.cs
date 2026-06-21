@@ -61,4 +61,40 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
+
+    [Fact]
+    public async Task Register_Returns_BadRequest_When_DuplicateEmail()
+    {
+        string email = CreateEmail("register-duplicate");
+
+        var firstRequest = new
+        {
+            Name = Helpers.GenerateRandomName(),
+            Phone = Helpers.GenerateRandomPhoneNumber(),
+            Email = email,
+            Password = Helpers.GenerateRandomPassword()
+        };
+
+        var firstResponse = await client.PostAsJsonAsync(
+            $"{baseUrl}/register",
+            firstRequest
+        );
+
+        Assert.Equal(HttpStatusCode.OK, firstResponse.StatusCode);
+
+        var duplicateRequest = new
+        {
+            Name = Helpers.GenerateRandomName(),
+            Phone = Helpers.GenerateRandomPhoneNumber(),
+            Email = email,
+            Password = Helpers.GenerateRandomPassword()
+        };
+
+        var duplicateResponse = await client.PostAsJsonAsync(
+            $"{baseUrl}/register",
+            duplicateRequest
+        );
+
+        Assert.Equal(HttpStatusCode.BadRequest, duplicateResponse.StatusCode);
+    }
 }
