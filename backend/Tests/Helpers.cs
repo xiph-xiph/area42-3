@@ -2,11 +2,6 @@ namespace Tests;
 
 public class Helpers
 {
-    public static string GenerateRandomEmail()
-    {
-        return $"test{Guid.NewGuid()}@example.com";
-    }
-
     public static string GenerateRandomPhoneNumber()
     {
         Random random = new();
