@@ -85,11 +85,7 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <button
-            className="login-button"
-            onClick={handleRegister}
-            type="submit"
-          >
+          <button className="login-button" type="submit">
             Registreren
           </button>
         </form>
