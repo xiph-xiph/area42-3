@@ -204,7 +204,7 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
     }
 
     [Fact]
-    public async Task Login_Returns_NotFound_When_NonExistentEmail()
+    public async Task Login_Returns_Unauthorized_When_NonExistentEmail()
     {
         var request = new
         {
@@ -217,7 +217,7 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
             request
         );
 
-        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
 
     private async Task RegisterUserAsync(string email, string password)
