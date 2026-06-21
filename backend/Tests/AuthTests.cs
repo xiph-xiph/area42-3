@@ -219,4 +219,22 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
     }
+
+    private async Task RegisterUserAsync(string email, string password)
+    {
+        var request = new
+        {
+            Name = Helpers.GenerateRandomName(),
+            Phone = Helpers.GenerateRandomPhoneNumber(),
+            Email = email,
+            Password = password
+        };
+
+        var response = await client.PostAsJsonAsync(
+            $"{baseUrl}/register",
+            request
+        );
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
 }
