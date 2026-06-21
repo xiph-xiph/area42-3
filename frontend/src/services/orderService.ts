@@ -2,7 +2,7 @@ import axios from "axios";
 
 // import type SuccessMessageDto from "../types/SuccessMessageDto";
 import type CartDto from "../types/CartDto";
-import type SuccessMessageDto from "@/types/SuccessMessageDto";
+import type SuccessMessageDto from "../types/SuccessMessageDto";
 
 const API_URL = "/api/order";
 
