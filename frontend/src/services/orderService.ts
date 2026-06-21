@@ -46,3 +46,17 @@ export const removeFromCart = async (
   );
   return response.data;
 };
+
+export const checkoutCart = async (
+  name: string,
+  phone: string,
+  pickupTime: Date,
+  remarks: string,
+): Promise<SuccessMessageDto> => {
+  const response = await axios.post<SuccessMessageDto>(
+    `${API_URL}/cart/checkout`,
+    { name, phone, pickupTime, remarks },
+    { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } },
+  );
+  return response.data;
+};
