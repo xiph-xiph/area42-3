@@ -23,7 +23,7 @@ public class TableController(TableService tableService, ReservationService reser
             {
                 Table = t,
                 IsAvailable = await _reservationService.CheckAvailability(t.Id, date),
-                AvailableSlots = await _reservationService.GetAvailableSlots(t.Id, date)
+                AvailableSlots = await _reservationService.GetAvailableSlots(date)
             });
         }
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Backend_Area42_3.Services;
 using Backend_Area42_3.DTO.Input;
 using Backend_Area42_3.DTO.Output;
@@ -12,35 +14,60 @@ public class ReservationController(ReservationService reservationService) : Cont
     private readonly ReservationService _reservationService = reservationService;
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<List<ReservationDto>>> GetReservations()
     {
-        var reservations = await _reservationService.GetAll();
-        var result = reservations.Select(r => new ReservationDto
+        if (User.IsInRole("Employee"))
         {
-            Reservation = r,
-            TableName = $"Tafel {r.TableId}"
-        }).ToList();
-        return Ok(result);
+            var reservations = await _reservationService.GetAll();
+            var result = reservations.Select(r => new ReservationDto
+            {
+                Reservation = r,
+                TableName = $"Tafel {r.TableId}"
+            }).ToList();
+            return Ok(result);
+        }
+        else
+        {
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+            var reservations = await _reservationService.GetByUserId(userId);
+            var result = reservations.Select(r => new ReservationDto
+            {
+                Reservation = r,
+                TableName = $"Tafel {r.TableId}"
+            }).ToList();
+            return Ok(result);
+        }
     }
 
     [HttpPost]
-    public async Task<ActionResult<ReservationDto>> CreateReservation(CreateReservationDto dto)
+    [Authorize]
+    public async Task<ActionResult<SuccessMessageDto>> CreateReservation(CreateReservationDto dto)
     {
-        var isAvailable = await _reservationService.CheckAvailability(dto.TableId, dto.StartDate);
-        if (!isAvailable)
-            return BadRequest(new { message = "Dit tijdslot is niet beschikbaar." });
+        int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        dto.UserId = userId;
 
         var reservation = await _reservationService.Create(dto);
-        if (reservation == null)
-            return BadRequest(new { message = "Reservering kon niet aangemaakt worden." });
 
-        return Ok(new ReservationDto { Reservation = reservation, TableName = $"Tafel {reservation.TableId}" });
+        if (reservation == null)
+            return BadRequest(new SuccessMessageDto
+            {
+                Success = false,
+                Message = "Geen beschikbare tafel gevonden voor dit tijdslot."
+            });
+
+        return Ok(new SuccessMessageDto
+        {
+            Success = true,
+            Message = "Reservering succesvol aangemaakt."
+        });
     }
 
     [HttpGet("available-slots")]
-    public async Task<ActionResult<List<DateTime>>> GetAvailableSlots(int tableId, DateTime date)
+    [Authorize]
+    public async Task<ActionResult<List<DateTime>>> GetAvailableSlots(DateTime date)
     {
-        var slots = await _reservationService.GetAvailableSlots(tableId, date);
+        var slots = await _reservationService.GetAvailableSlots(date);
         return Ok(slots);
     }
 }

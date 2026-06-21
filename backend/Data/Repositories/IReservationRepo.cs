@@ -11,4 +11,6 @@ public interface IReservationRepo
     Task<List<Reservation>> GetAll();
     Task<Reservation?> GetById(int id);
     Task Add(Reservation reservation);
+
+    Task<List<Reservation>> GetByUserId(int userId);
 }

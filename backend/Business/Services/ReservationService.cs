@@ -2,6 +2,7 @@
 using Backend_Area42_3.Models;
 using Backend_Area42_3.Enums;
 using Backend_Area42_3.DTO.Input;
+using Backend_Area42_3.DTO.Output;
 
 namespace Backend_Area42_3.Services;
 
@@ -19,26 +20,40 @@ public class ReservationService(
         return await _reservationRepo.GetAll();
     }
 
+    public async Task<List<Reservation>> GetByUserId(int userId)
+    {
+        return await _reservationRepo.GetByUserId(userId);
+    }
+
     public async Task<Reservation?> Create(CreateReservationDto dto)
     {
         // Check 1: bestaat de gebruiker?
         var user = await _userRepository.GetUserById(dto.UserId);
         if (user == null) return null;
 
-        // Check 2: past het aantal gasten op de tafel?
-        var tafel = await _tableRepo.GetById(dto.TableId);
-        if (tafel == null) return null;
-        if (dto.Amount > tafel.MaxGuests) return null;
+        // Check 2: zoek automatisch een beschikbare tafel
+        var tables = await _tableRepo.GetAll();
+        Table? beschikbareTafel = null;
 
-        // Check 3: is het tijdslot beschikbaar?
-        var isAvailable = await CheckAvailability(dto.TableId, dto.StartDate);
-        if (!isAvailable) return null;
+        foreach (var tafel in tables)
+        {
+            if (tafel.MaxGuests >= dto.Amount)
+            {
+                var isAvailable = await CheckAvailability(tafel.Id, dto.StartDate);
+                if (isAvailable)
+                {
+                    beschikbareTafel = tafel;
+                    break;
+                }
+            }
+        }
 
-        // Alles goed, maak reservering aan
+        if (beschikbareTafel == null) return null;
+
         var reservation = new Reservation
         {
             UserId = dto.UserId,
-            TableId = dto.TableId,
+            TableId = beschikbareTafel.Id,
             StartDate = dto.StartDate,
             Amount = dto.Amount,
             Restaurant = Restaurant.Restaurant,
@@ -58,8 +73,9 @@ public class ReservationService(
             r.Status == ReservationStatus.Scheduled);
     }
 
-    public async Task<List<DateTime>> GetAvailableSlots(int tableId, DateTime date)
+    public async Task<List<DateTime>> GetAvailableSlots(DateTime date)
     {
+        var tables = await _tableRepo.GetAll();
         var slots = new List<DateTime>
         {
             date.Date.AddHours(17),
@@ -72,12 +88,16 @@ public class ReservationService(
         var availableSlots = new List<DateTime>();
         foreach (var slot in slots)
         {
-            if (await CheckAvailability(tableId, slot))
+            foreach (var tafel in tables)
             {
-                availableSlots.Add(slot);
+                if (await CheckAvailability(tafel.Id, slot))
+                {
+                    availableSlots.Add(slot);
+                    break;
+                }
             }
         }
 
-        return availableSlots;
+        return availableSlots.Distinct().ToList();
     }
 }

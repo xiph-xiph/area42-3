@@ -54,7 +54,7 @@ public class ReservationServiceTests
             {
                 new Reservation
                 {
-                    TafelId = 1,
+                    TableId = 1,
                     StartDate = date,
                     Status = ReservationStatus.Scheduled
                 }
@@ -78,7 +78,6 @@ public class ReservationServiceTests
         var dto = new CreateReservationDto
         {
             UserId = 99,
-            TableId = 1,
             StartDate = new DateTime(2025, 6, 15, 19, 0, 0),
             Amount = 4
         };
@@ -91,23 +90,27 @@ public class ReservationServiceTests
     }
 
     [Fact]
-    public async Task Create_TafelTeKlein_ReturnsNull()
+    public async Task Create_GeenTafelBeschikbaar_ReturnsNull()
     {
         // Arrange
+        var date = new DateTime(2025, 6, 15, 19, 0, 0);
+
         _userRepoMock
             .Setup(r => r.GetUserById(1))
             .ReturnsAsync(new User { Id = 1, Name = "Ado", Email = "ado@test.nl", Role = UserRole.Customer, PasswordHash = "hash", Phone = "0612345678" });
 
         _tableRepoMock
-            .Setup(r => r.GetById(1))
-            .ReturnsAsync(new Table { Id = 1, MaxGuests = 2 });
+            .Setup(r => r.GetAll())
+            .ReturnsAsync(new List<Table>
+            {
+                new Table { Id = 1, MaxGuests = 2 } // te klein voor 4 gasten
+            });
 
         var dto = new CreateReservationDto
         {
             UserId = 1,
-            TableId = 1,
-            StartDate = new DateTime(2025, 6, 15, 19, 0, 0),
-            Amount = 10
+            StartDate = date,
+            Amount = 4
         };
 
         // Act
@@ -128,20 +131,22 @@ public class ReservationServiceTests
             .ReturnsAsync(new User { Id = 1, Name = "Ado", Email = "ado@test.nl", Role = UserRole.Customer, PasswordHash = "hash", Phone = "0612345678" });
 
         _tableRepoMock
-            .Setup(r => r.GetById(1))
-            .ReturnsAsync(new Table { Id = 1, MaxGuests = 6 });
+            .Setup(r => r.GetAll())
+            .ReturnsAsync(new List<Table>
+            {
+                new Table { Id = 1, MaxGuests = 6 }
+            });
 
         _reservationRepoMock
             .Setup(r => r.GetAll())
             .ReturnsAsync(new List<Reservation>
             {
-                new Reservation { TafelId = 1, StartDate = date, Status = ReservationStatus.Scheduled }
+                new Reservation { TableId = 1, StartDate = date, Status = ReservationStatus.Scheduled }
             });
 
         var dto = new CreateReservationDto
         {
             UserId = 1,
-            TableId = 1,
             StartDate = date,
             Amount = 4
         };
@@ -164,8 +169,11 @@ public class ReservationServiceTests
             .ReturnsAsync(new User { Id = 1, Name = "Ado", Email = "ado@test.nl", Role = UserRole.Customer, PasswordHash = "hash", Phone = "0612345678" });
 
         _tableRepoMock
-            .Setup(r => r.GetById(1))
-            .ReturnsAsync(new Table { Id = 1, MaxGuests = 6 });
+            .Setup(r => r.GetAll())
+            .ReturnsAsync(new List<Table>
+            {
+                new Table { Id = 1, MaxGuests = 6 }
+            });
 
         _reservationRepoMock
             .Setup(r => r.GetAll())
@@ -178,7 +186,6 @@ public class ReservationServiceTests
         var dto = new CreateReservationDto
         {
             UserId = 1,
-            TableId = 1,
             StartDate = date,
             Amount = 4
         };
@@ -190,5 +197,61 @@ public class ReservationServiceTests
         Assert.NotNull(result);
         Assert.Equal(1, result.UserId);
         Assert.Equal(date, result.StartDate);
+        Assert.Equal(ReservationStatus.Scheduled, result.Status);
+    }
+
+    [Fact]
+    public async Task GetAvailableSlots_GeenReserveringen_ReturnsAllSlots()
+    {
+        // Arrange
+        var date = new DateTime(2025, 6, 15);
+
+        _tableRepoMock
+            .Setup(r => r.GetAll())
+            .ReturnsAsync(new List<Table>
+            {
+                new Table { Id = 1, MaxGuests = 6 }
+            });
+
+        _reservationRepoMock
+            .Setup(r => r.GetAll())
+            .ReturnsAsync(new List<Reservation>());
+
+        // Act
+        var result = await _service.GetAvailableSlots(date);
+
+        // Assert
+        Assert.Equal(5, result.Count);
+    }
+
+    [Fact]
+    public async Task GetAvailableSlots_AllesBezet_ReturnsEmptyList()
+    {
+        // Arrange
+        var date = new DateTime(2025, 6, 15);
+
+        _tableRepoMock
+            .Setup(r => r.GetAll())
+            .ReturnsAsync(new List<Table>
+            {
+                new Table { Id = 1, MaxGuests = 6 }
+            });
+
+        _reservationRepoMock
+            .Setup(r => r.GetAll())
+            .ReturnsAsync(new List<Reservation>
+            {
+                new Reservation { TableId = 1, StartDate = date.AddHours(17), Status = ReservationStatus.Scheduled },
+                new Reservation { TableId = 1, StartDate = date.AddHours(18), Status = ReservationStatus.Scheduled },
+                new Reservation { TableId = 1, StartDate = date.AddHours(19), Status = ReservationStatus.Scheduled },
+                new Reservation { TableId = 1, StartDate = date.AddHours(20), Status = ReservationStatus.Scheduled },
+                new Reservation { TableId = 1, StartDate = date.AddHours(21), Status = ReservationStatus.Scheduled }
+            });
+
+        // Act
+        var result = await _service.GetAvailableSlots(date);
+
+        // Assert
+        Assert.Empty(result);
     }
 }

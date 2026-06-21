@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Backend_Area42_3.Models;
+﻿using Backend_Area42_3.Models;
 using Backend_Area42_3.Enums;
 using Npgsql;
 
@@ -17,6 +14,30 @@ public class ReservationRepo(NpgsqlDataSource dataSource) : IReservationRepo
         using var connection = await dataSource.OpenConnectionAsync();
         string query = "SELECT id, user_id, table_id, start_date, amount, restaurant::text, status::text FROM reservations";
         using var command = new NpgsqlCommand(query, connection);
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            result.Add(new Reservation
+            {
+                Id = reader.GetInt32(0),
+                UserId = reader.GetInt32(1),
+                TableId = reader.GetInt32(2),
+                StartDate = reader.GetDateTime(3),
+                Amount = reader.GetInt32(4),
+                Restaurant = Enum.Parse<Restaurant>(reader.GetString(5), true),
+                Status = Enum.Parse<ReservationStatus>(reader.GetString(6), true)
+            });
+        }
+        return result;
+    }
+
+    public async Task<List<Reservation>> GetByUserId(int userId)
+    {
+        var result = new List<Reservation>();
+        using var connection = await dataSource.OpenConnectionAsync();
+        string query = "SELECT id, user_id, table_id, start_date, amount, restaurant::text, status::text FROM reservations WHERE user_id = @userId";
+        using var command = new NpgsqlCommand(query, connection);
+        command.Parameters.AddWithValue("@userId", userId);
         using var reader = await command.ExecuteReaderAsync();
         while (await reader.ReadAsync())
         {
@@ -60,8 +81,7 @@ public class ReservationRepo(NpgsqlDataSource dataSource) : IReservationRepo
     public async Task Add(Reservation reservation)
     {
         using var connection = await dataSource.OpenConnectionAsync();
-        string query = @"INSERT INTO reservations (user_id, table_id, start_date, amount, restaurant, status)
-                         VALUES (@userId, @tableId, @startDate, @amount, @restaurant::restaurant, @status::reservation_status)";
+        string query = @"INSERT INTO reservations (user_id, table_id, start_date, amount, restaurant, status) VALUES (@userId, @tableId, @startDate, @amount, @restaurant::restaurant, @status::reservation_status)";
         using var command = new NpgsqlCommand(query, connection);
         command.Parameters.AddWithValue("@userId", reservation.UserId);
         command.Parameters.AddWithValue("@tableId", reservation.TableId);
