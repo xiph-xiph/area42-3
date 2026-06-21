@@ -202,4 +202,21 @@ public class AuthTests : IClassFixture<WebApplicationFactory<Program>>
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
+
+    [Fact]
+    public async Task Login_Returns_NotFound_When_NonExistentEmail()
+    {
+        var request = new
+        {
+            Email = CreateEmail("login-missing-user"),
+            Password = Helpers.GenerateRandomPassword()
+        };
+
+        var response = await client.PostAsJsonAsync(
+            $"{baseUrl}/login",
+            request
+        );
+
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+    }
 }
