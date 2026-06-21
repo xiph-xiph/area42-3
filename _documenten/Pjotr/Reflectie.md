@@ -1,0 +1,15 @@
+# Reflectie
+
+Ik heb zelf de repositoryhuisregels geschreven en daarin duidelijk vastgelegd dat iedereen met feature branches moet werken en nooit direct naar `main` mag pushen. In dit project heeft dat ook echt effect gehad: wijzigingen zijn vrijwel altijd via pull requests gegaan en dus ook via reviewmomenten. Dat maakte de workflow strakker en zorgde ervoor dat code niet zomaar ongecontroleerd in de hoofdtak terechtkwam.
+
+Als relatief ervaren software developer binnen dit team heb ik daarbij ook een ietwat leidende rol gespeeld.
+
+Daarnaast heb ik gedurende dit project veel geleerd van ASP.NET Core, klassendiagrammen schrijven en Git. Dat zijn onderdelen die in mijn werk niet altijd even vaak aan bod komen. Vooral Git branches waren voor mij leerzaam, omdat ik op werk meestal solo aan een project werk en daardoor weinig hoef te switchen tussen branches. Ook met klassendiagrammen was ik al wel bekend, maar daar heb ik hier duidelijk meer aandacht aan besteed dan op werk. C# en ASP.NET Core gebruik ik op werk eigenlijk niet.
+
+Wat ik vooral merkte, is dat de reviews inhoudelijk niet altijd heel diep gingen. Ik had op meer concrete feedback gehoopt, bijvoorbeeld over de opbouw van code, de kwaliteit van de implementatie of betere oplossingen voor bepaalde keuzes. Daardoor was de reviewcultuur wel aanwezig, maar in de praktijk ook wat beperkt in breedte. Dat gebrek aan inhoudelijke feedback is ook zeker te verklaren door de manier waarop we de workload van de development cycle hebben verdeeld. We kwamen uiteindelijk allemaal uit op een eindsprint, en dat zorgde niet alleen voor meer stress, maar dus ook voor krappere reviewmomenten en dus minder ruimte om echt de diepte in te gaan.
+
+Daar staat tegenover dat veel van mijn werk wel is goedgekeurd. Die approvals zijn voor mij belangrijk, omdat ze laten zien dat de gemaakte keuzes vaak acceptabel en duidelijk genoeg waren voor de rest van het team. Positieve feedback telt voor mij dus ook echt mee: als code wordt geapproved, zegt dat iets over de kwaliteit en over het feit dat de basis goed genoeg is om verder op te bouwen.
+
+Een ander reflectiemoment is dat ik heel laat doorhad hoe je in ASP.NET Core verschillende statuscodes goed kunt meegeven. Ik ging in het klassendiagram en elders uit van simpele DTO's, maar statuscodes had ik helemaal over het hoofd gezien. Achteraf zou ik de structuur waarschijnlijk anders hebben opgezet, bijvoorbeeld door vanuit de service een tussenobject met een statuscode mee te geven, zodat de controller die kan uitlezen en daarna de juiste statuscode samen met de rest van de DTO terug kan sturen. Dat tussenobject zou dan geen DTO zijn, maar meer een intern transportobject.
+
+Voor mij laat dit zien dat feedback in dit project niet alleen zat in losse opmerkingen, maar ook in de technische keuzes die samen werden gemaakt. De inhoudelijke feedback had uitgebreider gemogen, maar de reviews en afstemming hebben wel geholpen om het project gestructureerder, veiliger en consistenter neer te zetten.
