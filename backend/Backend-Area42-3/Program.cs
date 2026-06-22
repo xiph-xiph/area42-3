@@ -70,8 +70,10 @@ public class Program
         services.AddScoped<IMenuRepository, MenuRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+        services.AddScoped<IIssueRepository, IssueRepository>();
         services.AddScoped<AuthService>();
         services.AddScoped<MenuService>();
         services.AddScoped<OrderService>();
+        services.AddScoped<IssueService>();
     }
 }
