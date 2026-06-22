@@ -11,10 +11,17 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        var envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
+        Env.Load(envPath);
+        Console.WriteLine($"Looking for .env at: {envPath}");
+        Console.WriteLine($"File exists: {File.Exists(envPath)}");
+
+        var jwtKey = Environment.GetEnvironmentVariable("JwtSecretKey")
+            ?? throw new InvalidOperationException("JwtSecretKey environment variable is not set");
+
         var builder = WebApplication.CreateBuilder(args);
 
-        builder
-            .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -24,20 +31,13 @@ public class Program
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        System.Text.Encoding.UTF8.GetBytes(
-                            Environment.GetEnvironmentVariable("JwtSecretKey")
-                                ?? throw new InvalidOperationException(
-                                    "JwtSecretKey environment variable is not set"
-                                )
-                        )
+                        System.Text.Encoding.UTF8.GetBytes(jwtKey)
                     ),
                 };
             });
 
         builder.Services.AddAuthorization();
-
         builder.Services.AddControllers();
-
         ConfigureDependencyInjection(builder.Services);
 
         var app = builder.Build();
@@ -55,7 +55,6 @@ public class Program
 
     private static void ConfigureDependencyInjection(IServiceCollection services)
     {
-        Env.Load();
         var csb = new NpgsqlConnectionStringBuilder
         {
             Host = Environment.GetEnvironmentVariable("PostgresHost") ?? "localhost",
@@ -63,6 +62,7 @@ public class Program
             Username = Environment.GetEnvironmentVariable("PostgresUsername") ?? "postgres",
             Password = Environment.GetEnvironmentVariable("PostgresPassword") ?? "postgres",
         };
+
         services.AddSingleton(NpgsqlDataSource.Create(csb.ConnectionString));
         services.AddSingleton<IPasswordHasher, Argon2PasswordHasher>();
         services.AddSingleton<ITokenGenerator, JWTTokenGenerator>();
@@ -73,5 +73,12 @@ public class Program
         services.AddScoped<AuthService>();
         services.AddScoped<MenuService>();
         services.AddScoped<OrderService>();
+      
+        // ===== RESTAURANT - ADO =====
+        services.AddScoped<IReservationRepo, ReservationRepo>();
+        services.AddScoped<ITableRepo, TableRepo>();
+        services.AddScoped<ReservationService>();
+        services.AddScoped<TableService>();
+        // ===== RESTAURANT - ADO =====
     }
 }

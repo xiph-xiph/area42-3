@@ -2,4 +2,5 @@
   <Project Path="Backend-Area42-3/Backend-Area42-3.csproj" />
   <Project Path="Business/Business.csproj" />
   <Project Path="Data/Data.csproj" />
+  <Project Path="Tests/Tests.csproj" Id="db57bb01-1ac1-4f30-be15-c92ea660396f" />
 </Solution>
