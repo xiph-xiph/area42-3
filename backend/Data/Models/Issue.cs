@@ -11,7 +11,7 @@ public class Issue
     public required string Name { get; set; }
     public required string Description { get; set; }
     public required DateTime CreationDate{ get; set; }
-    public DateTime SolvedDate { get; set; }
+    public DateTime? SolvedDate { get; set; }
     public required bool Solved { get; set; }
 
 }
