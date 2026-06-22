@@ -7,5 +7,5 @@ public interface IIssueRepository
     Task<Issue?> CreateIssue(Issue issue);
     //Task<Issue?> UpdateIssue(Issue oldIssue, Issue newIssue);
     //Task<Issue?> GetIssueById(Guid issueId);
-    //Task<List<Issue?>> GetAll();
+    Task<List<Issue?>> GetAll();
 }
