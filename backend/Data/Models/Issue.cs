@@ -4,7 +4,7 @@ namespace Backend_Area42_3.Models;
 
 public class Issue
 {
-    public Guid Id { get; set; }
+    public required int Id { get; set; }
     public required int UserId { get; set; }
     public required PriorityEnum Priority { get; set; }
     public required CategoryEnum Catergory { get; set; }
