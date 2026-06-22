@@ -42,7 +42,14 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
         app.MapControllers();
+
+        app.MapFallbackToFile("index.html");
+
         app.Run();
     }
 
@@ -60,8 +67,13 @@ public class Program
         services.AddSingleton<IPasswordHasher, Argon2PasswordHasher>();
         services.AddSingleton<ITokenGenerator, JWTTokenGenerator>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IMenuRepository, MenuRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IOrderItemRepository, OrderItemRepository>();
         services.AddScoped<AuthService>();
-
+        services.AddScoped<MenuService>();
+        services.AddScoped<OrderService>();
+      
         // ===== RESTAURANT - ADO =====
         services.AddScoped<IReservationRepo, ReservationRepo>();
         services.AddScoped<ITableRepo, TableRepo>();

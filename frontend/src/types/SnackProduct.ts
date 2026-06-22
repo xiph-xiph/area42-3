@@ -3,7 +3,6 @@
 ======================================== */
 
 export interface SnackProduct {
-
   id: number;
 
   title: string;
@@ -15,5 +14,4 @@ export interface SnackProduct {
   category: string;
 
   popular: boolean;
-
 }

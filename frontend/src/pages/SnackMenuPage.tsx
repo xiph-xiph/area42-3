@@ -4,13 +4,16 @@
 
 import "./SnackMenuPage.css";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { getMenu } from "../services/menuService";
+import { getCart, addToCart, removeFromCart } from "../services/orderService";
+
 import SnackProductCard from "../components/SnackProductCard";
-import { snackProducts } from "../data/snackProducts";
-import type { CartItem } from "../types/CartItem";
+import type { OrderItem } from "../types/CartDto";
 import ShoppingCart from "../components/ShoppingCart";
+import type { MenuItem } from "../types/MenuDto";
 
 /* ========================================
    COMPONENT
@@ -21,20 +24,28 @@ function SnackMenuPage() {
      STATE
   ======================================== */
 
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [cart, setCart] = useState<OrderItem[]>([]);
+  const [refreshCart, setRefreshCart] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getMenu().then((data) => {
+      setMenuItems(data.menu);
+    });
+  }, []);
+
+  useEffect(() => {
+    getCart().then((data) => {
+      setCart(data.cart.items);
+    });
+  }, [refreshCart]);
 
   /* ========================================
      CONSTANTS
   ======================================== */
 
-  const categories = [
-    "Friet",
-    "Snacks",
-    "Burgers",
-    "Dranken",
-    "Desserts",
-  ];
+  const categories = ["Friet", "Snacks", "Burgers", "Dranken", "Desserts"];
 
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
@@ -42,48 +53,22 @@ function SnackMenuPage() {
      WINKELWAGEN
   ======================================== */
 
-  const addToCart = (product: typeof snackProducts[number]) => {
-    setCart((current) => {
-      const existingItem = current.find(
-        (item) => item.id === product.id
-      );
-
-      if (existingItem) {
-        return current.map((item) =>
-          item.id === product.id
-            ? {
-                ...item,
-                quantity: item.quantity + 1,
-              }
-            : item
-        );
-      }
-
-      return [
-        ...current,
-        {
-          id: product.id,
-          title: product.title,
-          price: product.price,
-          quantity: 1,
-        },
-      ];
-    });
+  const handleAddToCart = async (product: MenuItem) => {
+    const response = await addToCart(product.id, 1);
+    if (response.success) {
+      setRefreshCart((prev) => !prev);
+    } else {
+      alert("Fout bij toevoegen aan winkelmand: " + response.message);
+    }
   };
 
-  const removeFromCart = (productId: number) => {
-    setCart((current) =>
-      current
-        .map((item) =>
-          item.id === productId
-            ? {
-                ...item,
-                quantity: item.quantity - 1,
-              }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
+  const handleRemoveFromCart = async (productId: number) => {
+    const response = await removeFromCart(productId, 1);
+    if (response.success) {
+      setRefreshCart((prev) => !prev);
+    } else {
+      alert("Fout bij verwijderen uit winkelmand: " + response.message);
+    }
   };
 
   /* ========================================
@@ -91,12 +76,9 @@ function SnackMenuPage() {
   ======================================== */
 
   const getQuantity = (productId: number) => {
-    return (
-      cart.find((item) => item.id === productId)?.quantity ?? 0
-    );
+    return cart.find((item) => item.id === productId)?.quantity ?? 0;
   };
 
- 
   /* ========================================
      SCROLL
   ======================================== */
@@ -115,16 +97,13 @@ function SnackMenuPage() {
   return (
     <main className="snack-menu-page">
       <div className="snack-menu-container">
-
         {/* ========================================
             HEADER
         ======================================== */}
 
         <h1>Menu</h1>
 
-        <p className="menu-subtitle">
-          Vers bereid • Snel geserveerd
-        </p>
+        <p className="menu-subtitle">Vers bereid • Snel geserveerd</p>
 
         {/* ========================================
             CATEGORIEËN
@@ -157,21 +136,17 @@ function SnackMenuPage() {
             <h2>{category}</h2>
 
             <div className="menu-grid">
-              {snackProducts
-                .filter(
-                  (product) => product.category === category
-                )
+              {menuItems
+                .filter((product) => product.category === category)
                 .map((product) => (
                   <SnackProductCard
                     key={product.id}
-                    image={product.image}
+                    image={product.imageUrl}
                     title={product.title}
                     price={product.price}
                     quantity={getQuantity(product.id)}
-                    onAdd={() => addToCart(product)}
-                    onRemove={() =>
-                      removeFromCart(product.id)
-                    }
+                    onAdd={() => handleAddToCart(product)}
+                    onRemove={() => handleRemoveFromCart(product.id)}
                   />
                 ))}
             </div>
@@ -182,22 +157,22 @@ function SnackMenuPage() {
             WINKELWAGEN
         ======================================== */}
 
-<ShoppingCart
-  cart={cart}
-  onAdd={(id) => {
-    const product = snackProducts.find((p) => p.id === id);
+        <ShoppingCart
+          cart={cart}
+          onAdd={(id) => {
+            const product = menuItems.find((p) => p.id === id);
 
-    if (product) {
-      addToCart(product);
-    }
-  }}
-  onRemove={removeFromCart}
-  onCheckout={() =>
-    navigate("/snackhoek/checkout", {
-      state: { cart },
-    })
-  }
-/>
+            if (product) {
+              handleAddToCart(product);
+            }
+          }}
+          onRemove={handleRemoveFromCart}
+          onCheckout={() =>
+            navigate("/snackhoek/checkout", {
+              state: { cart },
+            })
+          }
+        />
       </div>
     </main>
   );

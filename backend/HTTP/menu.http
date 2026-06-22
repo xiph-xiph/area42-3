@@ -1,0 +1,8 @@
+### Menu API Tests
+
+@baseUrl = http://localhost:5229/api/menu
+@token = changeme
+
+### Get Menu Items
+GET {{baseUrl}}
+Authorization: Bearer {{token}}

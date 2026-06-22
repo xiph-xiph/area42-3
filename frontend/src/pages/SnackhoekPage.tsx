@@ -5,17 +5,24 @@ import { Link } from "react-router-dom";
 import FooterInfo from "../components/FooterInfo";
 import SnackProductCard from "../components/SnackProductCard";
 
-import { snackProducts } from "../data/snackProducts";
+import { useState, useEffect } from "react";
 
+import { getMenu } from "../services/menuService";
 import heroImage from "../assets/images/snackhoek_hero.png";
 import logoImage from "../assets/images/snackhoek_logo.png";
 import promoImage from "../assets/images/snackhoek_promo.png";
 import instagramLogo from "../assets/images/instagram-logo.png";
+import type { MenuItem } from "../types/MenuDto";
 
 function SnackhoekPage() {
-  const popularProducts = snackProducts.filter(
-    (product) => product.popular
-  );
+  const [snackProducts, setSnackProducts] = useState<MenuItem[]>([]);
+  useEffect(() => {
+    getMenu().then((data) => {
+      setSnackProducts(data.menu);
+    });
+  }, []);
+
+  const popularProducts = snackProducts.filter((product) => product.isPopular);
 
   return (
     <main className="snackhoek-page">
@@ -23,19 +30,9 @@ function SnackhoekPage() {
         {/* Hero */}
 
         <section className="snack-hero">
+          <img src={heroImage} alt="Snackhoek" className="snack-hero-image" />
 
-          <img
-            src={heroImage}
-            alt="Snackhoek"
-            className="snack-hero-image"
-          />
-
-          <img
-            src={logoImage}
-            alt="Snackhoek logo"
-            className="snack-logo"
-          />
-
+          <img src={logoImage} alt="Snackhoek logo" className="snack-logo" />
         </section>
 
         {/* Slogan */}
@@ -47,56 +44,39 @@ function SnackhoekPage() {
         {/* Buttons */}
 
         <section className="snack-buttons">
-
-          <Link
-            to="/snackhoek/menu"
-            className="snack-button outline"
-          >
+          <Link to="/snackhoek/menu" className="snack-button outline">
             Menu
           </Link>
 
-          <button className="snack-button filled">
-            Bestel online
-          </button>
-
+          <button className="snack-button filled">Bestel online</button>
         </section>
 
         {/* Promo */}
 
         <section className="promo-section">
-
           <h2>Promo</h2>
 
-          <img
-            src={promoImage}
-            alt="Promo"
-            className="promo-image"
-          />
-
+          <img src={promoImage} alt="Promo" className="promo-image" />
         </section>
 
         {/* Populair */}
 
         <section className="popular-section">
-
           <h2>Populair</h2>
 
           <div className="popular-grid">
-
-          {popularProducts.map((product) => (
-  <SnackProductCard
-    key={product.id}
-    image={product.image}
-    title={product.title}
-    price={product.price}
-    quantity={0}
-    onAdd={() => {}}
-    onRemove={() => {}}
-  />
-))}
-
+            {popularProducts.map((product) => (
+              <SnackProductCard
+                key={product.id}
+                image={product.imageUrl}
+                title={product.title}
+                price={product.price}
+                quantity={0}
+                onAdd={() => {}}
+                onRemove={() => {}}
+              />
+            ))}
           </div>
-
         </section>
 
         {/* Footer */}
@@ -110,7 +90,6 @@ function SnackhoekPage() {
           openingHours="12.00u. - 22.00u."
           socialLogo={instagramLogo}
         />
-
       </div>
     </main>
   );

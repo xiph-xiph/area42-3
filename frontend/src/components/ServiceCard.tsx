@@ -7,26 +7,14 @@ type ServiceCardProps = {
   route: string;
 };
 
-const ServiceCard = ({
-  logo,
-  image,
-  route,
-}: ServiceCardProps) => {
+const ServiceCard = ({ logo, image, route }: ServiceCardProps) => {
   return (
     <Link to={route} className="service-card">
-      <img
-        src={image}
-        alt=""
-        className="service-card-image"
-      />
+      <img src={image} alt="" className="service-card-image" />
 
-      <img
-        src={logo}
-        alt=""
-        className="service-card-logo"
-      />
+      <img src={logo} alt="" className="service-card-logo" />
     </Link>
-  );  
+  );
 };
 
 export default ServiceCard;
