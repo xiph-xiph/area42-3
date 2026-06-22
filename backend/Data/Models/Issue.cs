@@ -7,7 +7,7 @@ public class Issue
     public required int Id { get; set; }
     public required int UserId { get; set; }
     public required PriorityEnum Priority { get; set; }
-    public required CategoryEnum Catergory { get; set; }
+    public required CategoryEnum Category { get; set; }
     public required string Name { get; set; }
     public required string Description { get; set; }
     public required DateTime CreationDate{ get; set; }
