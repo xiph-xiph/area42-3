@@ -5,7 +5,7 @@ namespace Backend_Area42_3.Repositories;
 public interface IIssueRepository
 {
     Task<Issue?> CreateIssue(Issue issue);
-    Task<Issue?> UpdateIssue(int issueId, Issue newIssue);
-    //Task<Issue?> GetIssueById(int issueId);
+    Task<Issue?> UpdateIssue(Issue issueId, Issue newIssue);
+    Task<Issue?> GetIssueById(int issueId);
     Task<List<Issue>> GetAll(string filter = "");
 }

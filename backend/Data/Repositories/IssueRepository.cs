@@ -53,7 +53,7 @@ public class IssueRepository(NpgsqlDataSource dataSource) : IIssueRepository
         return (Issue?)await command.ExecuteScalarAsync();
     }
 
-    public async Task<Issue?> UpdateIssue(int issueId, Issue newIssue)
+    public async Task<Issue?> UpdateIssue(Issue oldIssue, Issue newIssue)
     {
         using var connection = await dataSource.OpenConnectionAsync();
 
@@ -62,7 +62,7 @@ public class IssueRepository(NpgsqlDataSource dataSource) : IIssueRepository
             UPDATE issues
             SET
                 user_id = @UserId,
-                priority = @Oriority::public.priority,
+                priority = @Priority::public.priority,
                 category = @Category::public.issue_category,
                 name = @Name,
                 description = @Description,
@@ -76,21 +76,45 @@ public class IssueRepository(NpgsqlDataSource dataSource) : IIssueRepository
 
         using var command = new NpgsqlCommand(query, connection);
         command.Parameters.AddWithValue("@UserId", newIssue.UserId);
-        command.Parameters.AddWithValue("@Priority", newIssue.Priority.ToString());
-        command.Parameters.AddWithValue("@Category", newIssue.Category.ToString()); // voeg toe automatisch prioriteit
+        command.Parameters.AddWithValue("@Priority", newIssue.Priority.ToString().ToLower());
+        command.Parameters.AddWithValue("@Category", newIssue.Category.ToString().ToLower()); // voeg toe automatisch prioriteit
         command.Parameters.AddWithValue("@Name", newIssue.Name);
         command.Parameters.AddWithValue("@Description", newIssue.Description);
         command.Parameters.AddWithValue("@CreationDate", DateTime.Now);
         command.Parameters.AddWithValue("@SolvedDate", newIssue.SolvedDate ?? (object)DBNull.Value);
         command.Parameters.AddWithValue("@Solved", newIssue.Solved);
-        command.Parameters.AddWithValue("@Id", issueId);
+        command.Parameters.AddWithValue("@Id", oldIssue.Id);
 
         return (Issue?)await command.ExecuteScalarAsync();
 
     }
-    //public async Task<Issue?> GetIssueById(Issue test)
-    //{
-    //}
+    public async Task<Issue?> GetIssueById(int issueId)
+    {
+        using var connection = await dataSource.OpenConnectionAsync();
+
+        string query = @"SELECT * FROM issues WHERE id = @Id;";
+
+        using var command = new NpgsqlCommand(query, connection);
+        using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync()) {
+
+            var foundIssue = new Issue
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("id")),
+                UserId = reader.GetInt32(reader.GetOrdinal("user_id")),
+                Priority = Enum.Parse<PriorityEnum>(reader.GetString(reader.GetOrdinal("priority")).ToLower(), ignoreCase: true),
+                Category = Enum.Parse<CategoryEnum>(reader.GetString(reader.GetOrdinal("category")).ToLower(), ignoreCase: true),
+                Name = reader.GetString(reader.GetOrdinal("name")),
+                Description = reader.GetString(reader.GetOrdinal("description")),
+                CreationDate = reader.GetDateTime(reader.GetOrdinal("creation_date")),
+                SolvedDate = reader.IsDBNull(reader.GetOrdinal("solved_date")) ? null : reader.GetDateTime(reader.GetOrdinal("solved_date")),
+                Solved = reader.GetBoolean(reader.GetOrdinal("solved"))
+            };
+            return foundIssue;
+        }
+        return null;
+    }
 
     public async Task<List<Issue>> GetAll(string filter = "")
     {
@@ -118,8 +142,8 @@ public class IssueRepository(NpgsqlDataSource dataSource) : IIssueRepository
             {
                 Id = reader.GetInt32(reader.GetOrdinal("id")),
                 UserId = reader.GetInt32(reader.GetOrdinal("user_id")),
-                Priority = Enum.Parse<PriorityEnum>(reader.GetString(reader.GetOrdinal("priority")), ignoreCase: true),
-                Category = Enum.Parse<CategoryEnum>(reader.GetString(reader.GetOrdinal("category")), ignoreCase: true),
+                Priority = Enum.Parse<PriorityEnum>(reader.GetString(reader.GetOrdinal("priority")).ToLower(), ignoreCase: true),
+                Category = Enum.Parse<CategoryEnum>(reader.GetString(reader.GetOrdinal("category")).ToLower(), ignoreCase: true),
                 Name = reader.GetString(reader.GetOrdinal("name")),
                 Description = reader.GetString(reader.GetOrdinal("description")),
                 CreationDate = reader.GetDateTime(reader.GetOrdinal("creation_date")),
