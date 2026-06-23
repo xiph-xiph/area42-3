@@ -32,13 +32,13 @@ public class IssueController(IssueService issueService) : ControllerBase
     }
 
     [HttpPost("create")]
-    [Authorize]
     public Task<SuccessMessageDto> ReportIssue(Issue issue)
     {
         return issueService.ReportIssue(issue);
     }
 
     [HttpPost("resolve")]
+    [Authorize]
     public Task<SuccessMessageDto> ResolveIssue(int issueId)
     {
         return issueService.ResolveIssue(issueId);
