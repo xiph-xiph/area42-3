@@ -26,7 +26,7 @@ Authorization: Bearer {{token}}
 }
 
 ### Create issue
-POST {{baseUrl}}/resolve
+POST {{baseUrl}}/create
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
