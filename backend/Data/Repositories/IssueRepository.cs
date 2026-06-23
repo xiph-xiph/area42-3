@@ -43,8 +43,8 @@ public class IssueRepository(NpgsqlDataSource dataSource) : IIssueRepository
         command.Parameters.AddWithValue("@UserId", issue.UserId);
         command.Parameters.AddWithValue("@Priority", issue.Priority.ToString());
         command.Parameters.AddWithValue("@Category", issue.Category.ToString()); // voeg toe automatisch prioriteit
-        command.Parameters.AddWithValue("@Name", issue.Category.ToString());
-        command.Parameters.AddWithValue("@Description", issue.Category.ToString());
+        command.Parameters.AddWithValue("@Name", issue.Name);
+        command.Parameters.AddWithValue("@Description", issue.Description);
         command.Parameters.AddWithValue("@CreationDate", DateTime.Now);
         command.Parameters.AddWithValue("@SolvedDate", issue.SolvedDate ?? (object)DBNull.Value);
         command.Parameters.AddWithValue("@Solved", issue.Solved);
@@ -53,17 +53,59 @@ public class IssueRepository(NpgsqlDataSource dataSource) : IIssueRepository
         return (Issue?)await command.ExecuteScalarAsync();
     }
 
-    //public async Task<Issue?> UpdateIssue(Issue oldIssue, Issue newIssue)
-    //{
-    //}
-    //public async Task<Issue?> GetIssueById(Issue test)
-    //{
-    //}
-    public async Task<List<Issue>> GetAll()
+    public async Task<Issue?> UpdateIssue(int issueId, Issue newIssue)
     {
         using var connection = await dataSource.OpenConnectionAsync();
 
+        string query = 
+         @"
+            UPDATE issues
+            SET
+                user_id = @UserId,
+                priority = @Oriority::public.priority,
+                category = @Category::public.issue_category,
+                name = @Name,
+                description = @Description,
+                creation_date = @CreationDate,
+                solved_date = @SolvedDate,
+                solved = @Solved
+            WHERE
+                id = @Id;
+        ";
+
+
+        using var command = new NpgsqlCommand(query, connection);
+        command.Parameters.AddWithValue("@UserId", newIssue.UserId);
+        command.Parameters.AddWithValue("@Priority", newIssue.Priority.ToString());
+        command.Parameters.AddWithValue("@Category", newIssue.Category.ToString()); // voeg toe automatisch prioriteit
+        command.Parameters.AddWithValue("@Name", newIssue.Name);
+        command.Parameters.AddWithValue("@Description", newIssue.Description);
+        command.Parameters.AddWithValue("@CreationDate", DateTime.Now);
+        command.Parameters.AddWithValue("@SolvedDate", newIssue.SolvedDate ?? (object)DBNull.Value);
+        command.Parameters.AddWithValue("@Solved", newIssue.Solved);
+        command.Parameters.AddWithValue("@Id", issueId);
+
+        return (Issue?)await command.ExecuteScalarAsync();
+
+    }
+    //public async Task<Issue?> GetIssueById(Issue test)
+    //{
+    //}
+
+    public async Task<List<Issue>> GetAll(string filter = "")
+    {
+        using var connection = await dataSource.OpenConnectionAsync();
         string query = @"SELECT * FROM issues;";
+
+        switch (filter)
+        {
+            case "solved":
+                query = @"SELECT * FROM issues WHERE solved = true;";
+                break;
+            case "unsolved":
+                query = @"SELECT * FROM issues WHERE solved = false;";
+                break;
+        }
 
         using var command = new NpgsqlCommand(query, connection);
         using var reader = await command.ExecuteReaderAsync();
