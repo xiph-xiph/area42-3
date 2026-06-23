@@ -37,4 +37,10 @@ public class IssueController(IssueService issueService) : ControllerBase
     {
         return issueService.ReportIssue(issue);
     }
+
+    [HttpPost("resolve")]
+    public Task<SuccessMessageDto> ResolveIssue(int issueId)
+    {
+        return issueService.ResolveIssue(issueId);
+    }
 }
