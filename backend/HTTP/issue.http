@@ -1,0 +1,43 @@
+### Issue API Tests
+
+@baseUrl = http://localhost:5229/api/issue
+@token = changeme
+@adminToken = changeme
+
+### Get All Issues
+GET {{baseUrl}}/get/all
+Authorization: Bearer {{token}}
+
+### Get Unsolved Issues
+GET {{baseUrl}}/get/unsolved
+Authorization: Bearer {{token}}
+
+### Get Solved Issues
+GET {{baseUrl}}/get/solved
+Authorization: Bearer {{token}}
+
+### Resolve Issue By Id
+POST {{baseUrl}}/resolve
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+	"issueId": 1,
+}
+
+### Create issue
+POST {{baseUrl}}/resolve
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 0,
+  "userId": 1,
+  "priority": 1,
+  "category": 0,
+  "name": "naam",
+  "description": "exampledescription",
+  "creationDate": "2014-04-09T00:00:00",
+  "solvedDate": null,
+  "solved": false
+}
